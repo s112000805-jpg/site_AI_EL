@@ -1,31 +1,28 @@
-const pad = (value) => String(Math.max(0, value)).padStart(2, "0");
-const timer = document.querySelector("[data-deadline]");
+const toast = document.querySelector(".toast");
+let toastTimer;
 
-function updateCountdown() {
-  if (!timer) return;
-  const remaining = Math.max(0, new Date(timer.dataset.deadline).getTime() - Date.now());
-  const seconds = Math.floor(remaining / 1000);
-  timer.querySelector("[data-days]").textContent = pad(Math.floor(seconds / 86400));
-  timer.querySelector("[data-hours]").textContent = pad(Math.floor((seconds % 86400) / 3600));
-  timer.querySelector("[data-minutes]").textContent = pad(Math.floor((seconds % 3600) / 60));
-  timer.querySelector("[data-seconds]").textContent = pad(seconds % 60);
+function showDemo(message) {
+  toast.textContent = message;
+  toast.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
 }
 
-updateCountdown();
-setInterval(updateCountdown, 1000);
-
-const toast = document.querySelector(".toast");
 document.querySelectorAll("[data-enroll]").forEach((button) => {
-  button.addEventListener("click", () => {
-    toast.classList.add("show");
-    window.setTimeout(() => toast.classList.remove("show"), 2400);
-  });
+  button.addEventListener("click", () => showDemo("此為課程展示網站，報名功能尚未開放。"));
 });
 
-const heroImage = document.querySelector(".course-cover img");
-if (heroImage) {
-  heroImage.addEventListener("load", () => {
-    heroImage.hidden = false;
-    document.querySelector(".cover-fallback")?.remove();
+document.querySelectorAll("[data-demo]").forEach((button) => {
+  button.addEventListener("click", () => showDemo("此功能將在正式課程平台開放。"));
+});
+
+const expandButton = document.querySelector("[data-expand]");
+const modules = [...document.querySelectorAll(".course-module")];
+
+expandButton?.addEventListener("click", () => {
+  const shouldOpen = modules.some((module) => !module.open);
+  modules.forEach((module) => {
+    module.open = shouldOpen;
   });
-}
+  expandButton.textContent = shouldOpen ? "全部收合" : "展開全部";
+});

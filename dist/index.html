@@ -2,170 +2,149 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AI 成人四階學習計畫｜從 AI 小白到系統管理</title>
-  <meta name="description" content="為零基礎成人設計的四階 AI 學習路徑：AI 啟蒙、AI 應用、AI 工作流與 AI 系統管理。">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2312052d'/%3E%3Cpath d='M8 18h6l-3 8 13-14h-7l3-6z' fill='%2319b5fe'/%3E%3C/svg%3E">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AI 成人四階學習計畫｜Flow Learning</title>
+  <meta name="description" content="從 AI 啟蒙、AI 應用、AI 工作流到 AI 系統管理，為零基礎成人設計的完整學習路徑。">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b2a5b'/%3E%3Cpath d='M8 22V10h4l4 6 4-6h4v12h-4v-6l-4 6-4-6v6z' fill='%235ae0c0'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="#top" aria-label="Flow Lab 首頁">
-      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
-      <span>FLOW LAB</span>
-    </a>
-    <nav aria-label="主要導覽">
-      <a href="#outcomes">四階路徑</a>
-      <a href="#syllabus">學習內容</a>
-      <a href="#faq">常見問題</a>
-    </nav>
+  <header class="topbar">
+    <a class="logo" href="#top" aria-label="Flow Learning 首頁"><span class="logo-mark">F</span><span>FLOW <b>LEARNING</b></span></a>
+    <button class="explore" type="button">探索課程 <span>⌄</span></button>
+    <label class="search"><span>⌕</span><input type="search" placeholder="你想學什麼？" aria-label="搜尋課程"></label>
+    <nav aria-label="網站導覽"><a href="#program">課程</a><a href="#instructor">講師</a><a href="#faq">常見問題</a></nav>
+    <button class="login" type="button" data-demo>登入</button>
   </header>
 
-  <main id="top" class="page-shell">
-    <article class="sales-page">
-      <section class="hero panel-dark">
+  <main id="top">
+    <section class="course-hero">
+      <div class="hero-inner">
         <div class="hero-copy">
-          <p class="eyebrow">零基礎成人 AI 學習路徑</p>
-          <h1>從 AI 小白<br><span>到真正會用 AI</span></h1>
-          <p class="hero-lead">不是背工具按鈕，而是依序學會理解、指揮、判斷與整合 AI，建立能帶進工作的實用能力。</p>
-          <div class="hero-stats" aria-label="課程特色">
-            <div><strong>4</strong><span>階學習</span></div>
-            <div><strong>20+</strong><span>實作主題</span></div>
-            <div><strong>1</strong><span>套工作系統</span></div>
+          <p class="breadcrumb">首頁　›　AI 與職場應用　›　四階學習計畫</p>
+          <span class="specialization">四階系列課程</span>
+          <h1>AI 成人四階<br>學習計畫</h1>
+          <p class="hero-subtitle">從零經驗開始，依序學會理解 AI、有效指揮、設計工作流，最後建立可測試、可交接的 AI 系統。</p>
+          <div class="provider"><span class="provider-mark">FL</span><p>由 <strong>Flow Lab 教學團隊</strong>規劃<br><small>以真實工作任務為核心的實作課程</small></p></div>
+          <div class="hero-social"><span>適合零基礎成人</span><span>繁體中文授課</span><span>線上彈性學習</span></div>
+        </div>
+        <aside class="enroll-card hero-card" aria-label="報名資訊">
+          <img src="ai-course-hero.png" alt="紫藍色 AI 助理與數位工作介面">
+          <div class="enroll-body">
+            <span class="next-cohort">下一梯次</span>
+            <h2>2026 / 10 / 04 開課</h2>
+            <p>一次加入四階完整學習路徑</p>
+            <p class="price"><small>首發價 NT$</small>3,980</p>
+            <button class="cta" type="button" data-enroll>立即加入課程</button>
+            <button class="outline" type="button" data-demo>下載課綱</button>
+            <small class="card-note">含課程回放、實作模板與階段作品講評</small>
           </div>
-        </div>
-        <div class="hero-art" role="img" aria-label="AI 工作系統抽象視覺">
-          <div class="orb"></div>
-          <div class="bot-face"><span></span><span></span></div>
-          <div class="flow-card card-a">理解</div>
-          <div class="flow-card card-b">判斷</div>
-          <div class="flow-card card-c">整合</div>
-        </div>
-      </section>
+        </aside>
+      </div>
+    </section>
 
-      <section class="promise section-pad">
-        <p class="section-kicker">一條不跳級的學習路徑</p>
-        <h2>先建立正確觀念，再把 AI 變成可靠的工作夥伴</h2>
-        <p>由安全使用與基本提問開始，逐步進入提示設計、資料分析、工作流程與系統管理；每一階都用作品證明真的學會。</p>
-        <div class="signal-line" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-      </section>
+    <section class="facts" aria-label="課程資訊">
+      <div><strong>4 階系列課程</strong><span>循序建立完整能力</span></div>
+      <div><strong>零基礎</strong><span>不需要程式背景</span></div>
+      <div><strong>約 40 小時</strong><span>依自己的進度學習</span></div>
+      <div><strong>4 項結業作品</strong><span>用成果證明能力</span></div>
+    </section>
 
-      <section id="outcomes" class="section-pad outcomes">
-        <div class="section-head">
-          <div>
-            <p class="section-kicker">成人適用的四階設計</p>
-            <h2>從第一次提問，到管理 AI 系統</h2>
+    <nav class="section-nav" aria-label="課程頁導覽">
+      <a href="#about">課程介紹</a><a href="#outcomes">學習成果</a><a href="#program">系列課程</a><a href="#instructor">講師</a>
+    </nav>
+
+    <div class="content-shell">
+      <div class="course-content">
+        <section id="about" class="content-section intro">
+          <p class="eyebrow">關於這門課</p>
+          <h2>不是學會某一個工具，而是建立不會過時的 AI 工作能力</h2>
+          <p>這套課程參考國際初學者 AI 課程的資訊架構，從生成式 AI 基礎、生產力、提示設計與負責任使用開始，再延伸到研究、工作流、Agent、測試與團隊治理。</p>
+        </section>
+
+        <section id="outcomes" class="content-section">
+          <h2>你將學會</h2>
+          <div class="learn-grid">
+            <article><span>✓</span><p>解釋 AI 如何運作、能做什麼，以及為什麼仍需要人的監督。</p></article>
+            <article><span>✓</span><p>寫出清楚具體的提示，運用背景、範例與限制改善輸出。</p></article>
+            <article><span>✓</span><p>整合搜尋、文件與資料分析，建立可重複的多步驟工作流。</p></article>
+            <article><span>✓</span><p>設定權限、人工審核與測試標準，管理可靠的 AI 系統。</p></article>
           </div>
-          <span class="chapter">01</span>
-        </div>
-        <div class="stage-grid">
-          <article class="stage-card stage-1"><div class="stage-top"><span>LEVEL 01</span><em>幼幼班</em></div><h3>AI 啟蒙</h3><p>認識生成式 AI、完成第一次對話，建立查證、個資與安全觀念。</p><strong>會安全完成一個 AI 任務</strong></article>
-          <article class="stage-card stage-2"><div class="stage-top"><span>LEVEL 02</span><em>小班</em></div><h3>AI 應用</h3><p>掌握目標、背景、輸出與邊界，讓 AI 穩定處理日常工作。</p><strong>會產出可直接使用的成果</strong></article>
-          <article class="stage-card stage-3"><div class="stage-top"><span>LEVEL 03</span><em>中班</em></div><h3>AI 工作流</h3><p>整合搜尋、文件與資料分析，把單次問答串成多步驟流程。</p><strong>會建立可重複的工作流程</strong></article>
-          <article class="stage-card stage-4"><div class="stage-top"><span>LEVEL 04</span><em>大班</em></div><h3>AI 系統管理</h3><p>設計權限、審核、測試與成效指標，讓 AI 流程能被團隊交接。</p><strong>會管理可測試的 AI 系統</strong></article>
-        </div>
-      </section>
+        </section>
 
-      <section class="blueprint section-pad">
-        <div class="section-head light">
-          <div><p class="section-kicker">四段成長標準</p><h2>每一階，都有明確的「學會」定義</h2></div>
-          <span class="chapter">02</span>
-        </div>
-        <div class="blueprint-map">
-          <div class="node"><b>01</b><span>AI 啟蒙<br>安全完成</span></div>
-          <i></i>
-          <div class="node"><b>02</b><span>AI 應用<br>穩定產出</span></div>
-          <i></i>
-          <div class="node"><b>03</b><span>AI 工作流<br>多步協作</span></div>
-          <i></i>
-          <div class="node"><b>04</b><span>系統管理<br>測試交接</span></div>
-        </div>
-        <p class="blueprint-note">升級不是因為看完影片，而是因為能獨立完成該階段的實作作品。</p>
-      </section>
+        <section class="content-section skills">
+          <h2>你將獲得的技能</h2>
+          <div class="chip-list"><span>AI 素養</span><span>生成式 AI</span><span>提示設計</span><span>批判思考</span><span>資料查證</span><span>多模態應用</span><span>工作流設計</span><span>Agent 管理</span><span>AI 治理</span></div>
+        </section>
 
-      <section id="syllabus" class="section-pad syllabus">
-        <div class="section-head">
-          <div><p class="section-kicker">完整課程地圖</p><h2>四階段該學會的核心知識</h2></div>
-          <span class="chapter">03</span>
-        </div>
-        <ol class="week-list">
-          <li><div class="week-num">L1</div><div><p>幼幼班｜AI 啟蒙</p><h3>建立正確期待與安全使用習慣</h3><span>AI 基本概念 · 第一次對話 · 幻覺與查證 · 個資與著作權</span><small>結業作品：安全完成一項真實生活或工作任務</small></div></li>
-          <li><div class="week-num">L2</div><div><p>小班｜AI 應用</p><h3>從隨便問問，進步到穩定產出</h3><span>提示四元素 · 追問迭代 · 摘要改寫 · 文件與多模態</span><small>結業作品：一組可重複使用的日常工作提示模板</small></div></li>
-          <li><div class="week-num">L3</div><div><p>中班｜AI 工作流</p><h3>把大型工作拆成可驗收的多步驟流程</h3><span>搜尋研究 · 來源查證 · 資料分析 · 工作拆解 · 品質檢查</span><small>結業作品：輸入、處理、審核、輸出的完整流程</small></div></li>
-          <li><div class="week-num">L4</div><div><p>大班｜AI 系統管理</p><h3>讓流程可交接、可測試、可持續改善</h3><span>Agent 觀念 · 權限邊界 · 例外處理 · 團隊治理 · ROI</span><small>結業作品：含測試案例與人工審核點的 AI 工作系統</small></div></li>
-        </ol>
-      </section>
+        <section id="program" class="content-section program">
+          <div class="program-head"><div><p class="eyebrow">系列課程</p><h2>四階完整學習路徑</h2></div><button type="button" class="text-button" data-expand>展開全部</button></div>
+          <p class="section-lead">每一階都包含觀念、示範、跟做練習與結業作品。你可以從零開始，也可以依照目前能力選擇起點。</p>
 
-      <section class="audience section-pad">
-        <div>
-          <p class="section-kicker">從哪一階開始？</p>
-          <h2>零基礎可從頭學，有經驗也能找到位置</h2>
-        </div>
-        <div class="check-list">
-          <p><span>✓</span> 完全沒用過 AI：從 AI 啟蒙開始</p>
-          <p><span>✓</span> 會聊天但成果不穩：從 AI 應用開始</p>
-          <p><span>✓</span> 已能完成單項任務：進入 AI 工作流</p>
-          <p><span>✓</span> 要導入團隊與自動化：進入 AI 系統管理</p>
-        </div>
-      </section>
+          <details class="course-module" open>
+            <summary><span class="level level-1">01</span><div><small>幼幼班</small><h3>AI 啟蒙</h3><p>建立正確期待與安全使用習慣</p></div><span class="module-meta">4–6 小時　⌄</span></summary>
+            <div class="module-body">
+              <div class="objective"><strong>課程目標</strong><p>理解 AI、生成式 AI 與搜尋的差異，能安全完成第一個任務，並知道重要資訊必須查證。</p></div>
+              <ol><li><b>AI 到底是什麼？</b><span>人工智慧、生成式 AI、資料與模型</span></li><li><b>第一次與 AI 協作</b><span>提問、追問、改寫與基本操作</span></li><li><b>AI 也會說錯話</b><span>幻覺、過時資訊與來源查證</span></li><li><b>AI 安全使用守則</b><span>個資、機密、著作權與偏見</span></li></ol>
+              <p class="project"><span>結業作品</span>使用 AI 完成一項真實任務，附上人工查證紀錄。</p>
+            </div>
+          </details>
 
-      <section class="instructor section-pad">
-        <div class="portrait" aria-hidden="true"><span>FL</span></div>
-        <div>
-          <p class="section-kicker">你的陪跑教練</p>
-          <h2>林奕辰 Ian</h2>
-          <p>AI 流程顧問，協助內容、行銷與營運團隊把高頻工作整理成可執行的系統。四階課程不追逐工具清單，而是從觀念、應用到團隊導入，陪你建立能長期使用的能力。</p>
-          <div class="tags"><span>AI 素養</span><span>工作流設計</span><span>團隊導入</span></div>
-        </div>
-      </section>
+          <details class="course-module">
+            <summary><span class="level level-2">02</span><div><small>小班</small><h3>AI 應用</h3><p>從隨便問問，進步到穩定產出</p></div><span class="module-meta">8–12 小時　⌄</span></summary>
+            <div class="module-body">
+              <div class="objective"><strong>課程目標</strong><p>掌握目標、背景、輸出與邊界，讓 AI 協助摘要、寫作、規劃、比較與日常辦公。</p></div>
+              <ol><li><b>好提示的核心元素</b><span>任務、背景、資料、格式與邊界</span></li><li><b>追問與反覆改善</b><span>澄清問題、範例與多輪協作</span></li><li><b>AI 職場生產力</b><span>Email、摘要、企劃與決策輔助</span></li><li><b>文件與多模態應用</b><span>PDF、圖片、表格與內容比較</span></li></ol>
+              <p class="project"><span>結業作品</span>建立摘要、寫作、分析、規劃和檢查五種提示模板。</p>
+            </div>
+          </details>
 
-      <section id="faq" class="section-pad faq">
-        <p class="section-kicker">FAQ</p>
-        <h2>常見問題</h2>
-        <details><summary>完全沒有用過 AI 也能參加嗎？<span>＋</span></summary><p>可以。幼幼班「AI 啟蒙」從基本概念、第一次對話與安全習慣開始，不需要程式背景。</p></details>
-        <details><summary>一定要從幼幼班開始嗎？<span>＋</span></summary><p>不一定。已有經驗者可依作品能力選擇起點；若能穩定產出內容，可直接從中班「AI 工作流」開始。</p></details>
-        <details><summary>錯過直播怎麼辦？<span>＋</span></summary><p>每堂課提供 90 天回放；作業與模板可永久保留。</p></details>
-        <details><summary>需要額外購買哪些工具？<span>＋</span></summary><p>課程會優先使用免費或現有方案完成練習，再依你的需求介紹可選工具。</p></details>
-      </section>
+          <details class="course-module">
+            <summary><span class="level level-3">03</span><div><small>中班</small><h3>AI 工作流</h3><p>把單次問答串成可重複流程</p></div><span class="module-meta">12–18 小時　⌄</span></summary>
+            <div class="module-body">
+              <div class="objective"><strong>課程目標</strong><p>整合研究、文件與資料分析，將大型工作拆成輸入、處理、審核及輸出。</p></div>
+              <ol><li><b>AI 搜尋與研究</b><span>研究問題、來源層級與交叉查證</span></li><li><b>資料整理與分析</b><span>分類、趨勢、異常與洞察呈現</span></li><li><b>多步驟工作流設計</b><span>任務拆解、完成條件與人工審核</span></li><li><b>模板與知識管理</b><span>背景資料、範例、版本與品質標準</span></li></ol>
+              <p class="project"><span>結業作品</span>完成一套研究、分析、產出與審核的可重複流程。</p>
+            </div>
+          </details>
 
-      <section class="final-cta section-pad panel-dark">
-        <p class="section-kicker">從適合你的階段開始</p>
-        <h2>把「會聊天」升級成真正的 AI 工作能力</h2>
-        <p>由 AI 啟蒙一路走到系統管理，帶走可使用、可驗證、可交接的完整能力。</p>
-        <a class="button button-light" href="#ticket">查看課程方案</a>
-      </section>
-    </article>
+          <details class="course-module">
+            <summary><span class="level level-4">04</span><div><small>大班</small><h3>AI 系統管理</h3><p>讓流程可測試、可交接、可持續改善</p></div><span class="module-meta">18–24 小時　⌄</span></summary>
+            <div class="module-body">
+              <div class="objective"><strong>課程目標</strong><p>理解 Agent 與自動化，設計權限、測試、例外處理、團隊治理及成效指標。</p></div>
+              <ol><li><b>Agent 與自動化基礎</b><span>觸發、工具、狀態與適用情境</span></li><li><b>權限與人工關卡</b><span>最小權限、批准、停止與升級條件</span></li><li><b>AI 系統測試</b><span>正常、缺資料、例外與高風險案例</span></li><li><b>治理與成效管理</b><span>負責人、版本、品質、時間與返工率</span></li></ol>
+              <p class="project"><span>結業作品</span>建立含權限、測試案例與人工審核點的 AI 工作系統。</p>
+            </div>
+          </details>
+        </section>
 
-    <aside id="ticket" class="purchase-card" aria-label="課程購買資訊">
-      <div class="course-cover">
-        <img src="ai-course-hero.png" alt="紫藍色 AI 工作系統課程主視覺" hidden>
-        <div class="cover-fallback"><span>AI</span><strong>成人四階<br>學習計畫</strong></div>
+        <section class="content-section learning-method">
+          <h2>學習方式</h2>
+          <div class="method-grid"><article><b>20%</b><h3>必要觀念</h3><p>用白話建立正確的 AI 心智模型。</p></article><article><b>60%</b><h3>跟做實作</h3><p>用真實工作情境反覆練習。</p></article><article><b>20%</b><h3>檢查改善</h3><p>依品質標準審核並修正成果。</p></article></div>
+        </section>
+
+        <section id="instructor" class="content-section instructor">
+          <div class="avatar">FL</div>
+          <div><p class="eyebrow">課程講師</p><h2>Flow Lab 教學團隊</h2><p>聚焦 AI 素養、工作流設計與組織導入。課程不追逐工具清單，而是以能否安全完成任務、穩定產出、建立流程及管理系統作為學習標準。</p><div class="instructor-stats"><span><b>4</b> 階能力設計</span><span><b>20+</b> 實作主題</span><span><b>4</b> 項結業作品</span></div></div>
+        </section>
+
+        <section id="faq" class="content-section faq">
+          <h2>常見問題</h2>
+          <details><summary>完全沒有用過 AI 也能參加嗎？<span>＋</span></summary><p>可以。第一階從 AI 基本概念、第一次對話及安全習慣開始，不需要任何程式背景。</p></details>
+          <details><summary>一定要從第一階開始嗎？<span>＋</span></summary><p>不一定。已有經驗者可依作品能力選擇起點；能穩定完成單項任務者，可從中班「AI 工作流」開始。</p></details>
+          <details><summary>課程只教特定 AI 工具嗎？<span>＋</span></summary><p>不會。示範會使用主流工具，但重點是提示、查證、工作流與治理等可移轉能力。</p></details>
+        </section>
       </div>
-      <div class="course-info">
-        <p class="mini-label">零基礎線上陪跑課程</p>
-        <h2>AI 成人四階學習計畫</h2>
-        <div class="meta"><span>◫</span><p><b>2026 / 10 / 04 起</b><br>每週日 19:30–21:30</p></div>
-        <div class="meta"><span>⌖</span><p><b>Google Meet</b><br>含 90 天課程回放</p></div>
-      </div>
-      <div class="ticket-box">
-        <div class="ticket-title"><div><small>首發優惠</small><strong>四階完整班</strong></div><span>推薦</span></div>
-        <p class="old-price">原價 NT$8,800</p>
-        <p class="price"><small>NT$</small>3,980</p>
-        <div class="countdown" data-deadline="2026-10-04T19:30:00+08:00">
-          <div><b data-days>00</b><span>天</span></div><div><b data-hours>00</b><span>時</span></div><div><b data-minutes>00</b><span>分</span></div><div><b data-seconds>00</b><span>秒</span></div>
-        </div>
-        <ul><li>幼幼班｜AI 啟蒙</li><li>小班｜AI 應用</li><li>中班｜AI 工作流</li><li>大班｜AI 系統管理</li></ul>
-        <button class="button primary" type="button" data-enroll>立即保留席次</button>
-        <p class="secure-note">14 天內可轉讓名額 · 安心付款</p>
-      </div>
-    </aside>
+
+      <aside class="enroll-card rail-card" aria-label="報名資訊">
+        <div class="enroll-body"><span class="next-cohort">四階完整班</span><h2>從 AI 小白到系統管理</h2><ul><li>四階系列課程</li><li>約 40 小時彈性學習</li><li>實作模板與作品講評</li><li>90 天課程回放</li></ul><p class="price"><small>首發價 NT$</small>3,980</p><button class="cta" type="button" data-enroll>立即加入課程</button><small class="card-note">下一梯次：2026 / 10 / 04</small></div>
+      </aside>
+    </div>
   </main>
 
-  <div class="mobile-bar">
-    <div><small>首發優惠</small><strong>NT$3,980</strong></div>
-    <button class="button primary" type="button" data-enroll>立即報名</button>
-  </div>
-  <div class="toast" role="status" aria-live="polite">報名功能為展示版本</div>
+  <footer><div class="logo"><span class="logo-mark">F</span><span>FLOW <b>LEARNING</b></span></div><p>讓每個人都能安全、有效地使用 AI。</p></footer>
+  <div class="mobile-enroll"><div><small>四階完整班</small><b>NT$3,980</b></div><button class="cta" type="button" data-enroll>立即加入</button></div>
+  <div class="toast" role="status" aria-live="polite">此為課程展示網站，報名功能尚未開放。</div>
   <script src="script.js"></script>
 </body>
 </html>
