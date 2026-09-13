@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1789272488381,
+      "tag": "0000_rapid_firebrand",
+      "breakpoints": true
+    }
+  ]
+}
