@@ -167,6 +167,15 @@ export const courseStages: CourseStage[] = [
         durationLabel: "11:41",
         kind: "延伸影片",
       },
+      {
+        id: "S4l10bgniCQ",
+        code: "AI-04-05",
+        title: "搜尋智能體的一天：一個簡單 AI 的思考方式",
+        description: "透過搜尋智能體的一日流程，理解目標拆解、資訊搜尋、結果評估與修正，建立 Agent 決策迴圈的概念。",
+        durationSeconds: 513,
+        durationLabel: "08:33",
+        kind: "延伸影片",
+      },
     ],
     topics: [
       { title: "Agent 與自動化基礎", detail: "觸發、工具、狀態與適用情境" },
