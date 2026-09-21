@@ -1,4 +1,15 @@
-# vinext-starter
+# AI 課程網站
+
+## Windows 快速啟動
+
+1. 解壓縮完整網站資料夾。
+2. 雙擊根目錄的 `啟動網站.cmd`。
+3. 第一次啟動會自動安裝必要元件並建立本機學習紀錄資料庫，完成後自動開啟瀏覽器。
+4. 請保留「AI Course Site Server」視窗；關閉該視窗即可停止網站。
+
+啟動器需要 Node.js 22 以上版本；如果尚未安裝，啟動器會開啟官方下載頁。
+
+## 開發架構
 
 A clean full-stack starter running on [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and Drizzle support.
 
