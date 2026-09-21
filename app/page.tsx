@@ -5,6 +5,7 @@ import { isAdminUser } from "@/lib/authz";
 import Image from "next/image";
 import { CourseCatalog } from "@/app/components/course-catalog";
 import { ThemeToggle } from "@/app/components/theme-toggle";
+import { FontSizeControl } from "@/app/components/font-size-control";
 import { MessageCircle, Video } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -18,6 +19,7 @@ export default async function Home() {
       <nav aria-label="主要導覽">
         <a href="#course-map">課程地圖</a><a href="#method">學習方法</a><a href="/progress">學習成果</a>
         {isAdminUser(user) && <a href="/admin">管理後台</a>}
+        <FontSizeControl />
         <ThemeToggle />
         {user ? <a className="nav-button" href={chatGPTSignOutPath("/")} target="_top">登出</a> : <a className="nav-button" href={chatGPTSignInPath("/")} target="_top">登入</a>}
       </nav>

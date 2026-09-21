@@ -3,6 +3,7 @@ import { getAdminLearnerReport } from "@/db/progress";
 import { courseStages, formatDuration, lessons } from "@/lib/courses";
 import { isAdminUser } from "@/lib/authz";
 import Link from "next/link";
+import { FontSizeControl } from "@/app/components/font-size-control";
 import { notFound, redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
@@ -19,7 +20,7 @@ export default async function LearnerReportPage({ params }: { params: Promise<{ 
   const percent = lessons.length ? Math.round((completed / lessons.length) * 100) : 0;
 
   return <main className="dashboard-shell">
-    <header className="dashboard-header"><Link className="brand" href="/"><span>F</span><b>FLOW AI 學院</b></Link><nav><Link href="/admin">返回後台</Link><Link href="/progress">我的成果</Link><a href={chatGPTSignOutPath("/")} target="_top">登出</a></nav></header>
+    <header className="dashboard-header"><Link className="brand" href="/"><span>F</span><b>FLOW AI 學院</b></Link><nav><Link href="/admin">返回後台</Link><Link href="/progress">我的成果</Link><FontSizeControl /><a href={chatGPTSignOutPath("/")} target="_top">登出</a></nav></header>
     <section className="dashboard-title"><div><p className="eyebrow">LEARNER REPORT</p><h1>{report.learner.display_name}</h1><p>{report.learner.email} · 個別學習報告</p></div><a className="export-button" href={`/api/admin/export?userId=${encodeURIComponent(report.learner.user_id)}`}>下載個人報告 CSV</a></section>
     <section className="metric-grid"><article><span>整體完成率</span><b>{percent}%</b><div className="progress-bar"><i style={{ width: `${percent}%` }} /></div></article><article><span>已完成</span><b>{completed}<small> / {lessons.length} 課</small></b></article><article><span>學習中</span><b>{report.progress.filter((row) => row.status === "in_progress").length}<small> 課</small></b></article><article><span>總學習時間</span><b>{formatDuration(watched)}</b></article></section>
     <section className="report-panel"><div className="panel-heading"><h2>逐課明細</h2><span>觀看達 80% 即完成</span></div>

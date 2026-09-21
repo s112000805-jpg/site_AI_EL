@@ -3,6 +3,7 @@ import { getUserProgress } from "@/db/progress";
 import { courseStages, formatDuration, lessons } from "@/lib/courses";
 import { isAdminUser } from "@/lib/authz";
 import Link from "next/link";
+import { FontSizeControl } from "@/app/components/font-size-control";
 
 export const dynamic = "force-dynamic";
 
@@ -16,7 +17,7 @@ export default async function ProgressPage() {
   const percent = lessons.length ? Math.round((completed / lessons.length) * 100) : 0;
   const nextLesson = lessons.find((lesson) => progressMap.get(lesson.id)?.status !== "completed");
   return <main className="dashboard-shell">
-    <header className="dashboard-header"><Link className="brand" href="/"><span>F</span><b>FLOW AI 學院</b></Link><nav><Link href="/">返回課程</Link>{isAdminUser(user) && <Link href="/admin">管理後台</Link>}<a href={chatGPTSignOutPath("/")} target="_top">登出</a></nav></header>
+    <header className="dashboard-header"><Link className="brand" href="/"><span>F</span><b>FLOW AI 學院</b></Link><nav><Link href="/">返回課程</Link>{isAdminUser(user) && <Link href="/admin">管理後台</Link>}<FontSizeControl /><a href={chatGPTSignOutPath("/")} target="_top">登出</a></nav></header>
     <section className="dashboard-title"><div><p className="eyebrow">LEARNING REPORT</p><h1>{user.displayName} 的學習成果</h1><p>你的課程完成狀態與實際影片觀看時間會自動更新。</p></div>{nextLesson && <a className="primary-action" href={`/#lesson-${nextLesson.id}`}>繼續學習</a>}</section>
     <section className="metric-grid"><article><span>整體完成率</span><b>{percent}%</b><div className="progress-bar"><i style={{ width: `${percent}%` }} /></div></article><article><span>已完成</span><b>{completed}<small> / {lessons.length} 課</small></b></article><article><span>學習中</span><b>{inProgress}<small> 課</small></b></article><article><span>總學習時間</span><b>{formatDuration(watched)}</b></article></section>
     <section className="report-panel"><div className="panel-heading"><h2>課程進度</h2><span>觀看達 80% 即完成</span></div>

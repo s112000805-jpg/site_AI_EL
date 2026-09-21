@@ -1,24 +1,34 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { Moon, Sun } from "lucide-react";
 
 type Theme = "light" | "dark";
 
+const themeChangeEvent = "flow-ai-theme-change";
+
+function getTheme(): Theme {
+  return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+}
+
+function subscribeToTheme(onChange: () => void) {
+  window.addEventListener(themeChangeEvent, onChange);
+  return () => window.removeEventListener(themeChangeEvent, onChange);
+}
+
+function applyTheme(next: Theme) {
+  document.documentElement.dataset.theme = next;
+  window.localStorage.setItem("flow-ai-theme", next);
+  window.dispatchEvent(new Event(themeChangeEvent));
+}
+
 /** 閱讀模式只儲存在使用者裝置，不會寫入學習紀錄。 */
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>("light");
-
-  useEffect(() => {
-    const current = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
-    setTheme(current);
-  }, []);
+  const theme = useSyncExternalStore(subscribeToTheme, getTheme, () => "light");
 
   function toggleTheme() {
     const next = theme === "light" ? "dark" : "light";
-    document.documentElement.dataset.theme = next;
-    window.localStorage.setItem("flow-ai-theme", next);
-    setTheme(next);
+    applyTheme(next);
   }
 
   return (
