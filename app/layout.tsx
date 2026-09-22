@@ -1,4 +1,6 @@
-import type { Metadata } from "next";
+import { MobileNavigation } from "@/app/components/mobile-navigation";
+import { PwaRegistration } from "@/app/components/pwa-registration";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -7,7 +9,21 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
+    apple: "/apple-touch-icon.png",
   },
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "FLOW AI",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#09233f" },
+    { media: "(prefers-color-scheme: dark)", color: "#0d1b29" },
+  ],
 };
 
 export default function RootLayout({
@@ -18,7 +34,11 @@ export default function RootLayout({
   return (
     <html lang="zh-Hant" suppressHydrationWarning>
       <head><script dangerouslySetInnerHTML={{ __html: `(function(){try{var r=document.documentElement;var t=localStorage.getItem('flow-ai-theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';r.dataset.theme=t;var f=localStorage.getItem('flow-ai-font-size');r.dataset.fontSize=f==='small'||f==='large'?f:'medium'}catch(e){}})()` }} /></head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {children}
+        <MobileNavigation />
+        <PwaRegistration />
+      </body>
     </html>
   );
 }

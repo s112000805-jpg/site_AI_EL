@@ -17,6 +17,20 @@
 
 html[data-theme="dark"]{color-scheme:dark;--navy:#e9f4ff;--blue:#75b8ff;--mint:#42e0b8;--ice:#142f37;--ink:#e5edf5;--muted:#aebdca;--line:#2c4356;--paper:#0d1b29;--sand:#101f2e}html[data-theme="dark"] body{background:var(--paper)}html[data-theme="dark"] .topbar,html[data-theme="dark"] .dashboard-header{background:#0b1825}html[data-theme="dark"] .course-hero{background:linear-gradient(115deg,#112c32 0%,#0e2030 48%,#17263f 100%)}html[data-theme="dark"] .hero-note,html[data-theme="dark"] .course-stage,html[data-theme="dark"] .lesson-card,html[data-theme="dark"] .method-grid,html[data-theme="dark"] .metric-grid article,html[data-theme="dark"] .report-panel,html[data-theme="dark"] .catalog-table-wrap,html[data-theme="dark"] .report-filters input,html[data-theme="dark"] .report-filters select{background:#132333}html[data-theme="dark"] .secondary-action{background:#132333;border-color:#385267;color:var(--ink)}html[data-theme="dark"] .video-state{background:#102231}html[data-theme="dark"] .course-stage.stage-tone-1{--stage-soft:#13362f}html[data-theme="dark"] .course-stage.stage-tone-2{--stage-soft:#172f4b}html[data-theme="dark"] .course-stage.stage-tone-3{--stage-soft:#3b2b14}html[data-theme="dark"] .course-stage.stage-tone-4{--stage-soft:#2c2340}html[data-theme="dark"] .catalog-table tbody tr:hover{background:#142f37}html[data-theme="dark"] .stage-badge.tone-1{background:#133f34;color:#75e2c2}html[data-theme="dark"] .stage-badge.tone-2{background:#183a5c;color:#91c7ff}html[data-theme="dark"] .stage-badge.tone-3{background:#463216;color:#ffc96e}html[data-theme="dark"] .stage-badge.tone-4{background:#39284f;color:#d0aff8}html[data-theme="dark"] .dashboard-shell{background:#0b1722}html[data-theme="dark"] .coming-soon{background:#132333}
 
+/* 夜間模式的主要操作維持高對比，避免淺色按鈕搭配白字。 */
+html[data-theme="dark"] .primary-action,
+html[data-theme="dark"] .primary-action.light,
+html[data-theme="dark"] .nav-button,
+html[data-theme="dark"] .report-filters button,
+html[data-theme="dark"] .export-button{background:var(--mint);color:#071a2e!important}
+html[data-theme="dark"] .primary-action:hover,
+html[data-theme="dark"] .primary-action.light:hover,
+html[data-theme="dark"] .nav-button:hover,
+html[data-theme="dark"] .report-filters button:hover,
+html[data-theme="dark"] .export-button:hover{background:var(--blue);color:#071a2e!important}
+html[data-theme="dark"] .cta-section{background:#071a2e}
+html[data-theme="dark"] .catalog-table th{background:#173b57;color:#fff}
+
 @media(max-width:850px){.catalog-heading{align-items:stretch;flex-direction:column}.course-search{width:100%}.theme-toggle span{display:none}.theme-toggle{padding:9px}.site-footer{grid-template-columns:1fr}.footer-contact{flex-wrap:wrap}.topbar nav .theme-toggle{display:inline-flex}}
 @media(max-width:650px){.catalog-table-wrap{overflow:visible;border:0;background:transparent;box-shadow:none}.catalog-table{min-width:0}.catalog-table thead{display:none}.catalog-table,.catalog-table tbody,.catalog-table tr,.catalog-table td{display:block;width:100%}.catalog-table tr{margin-bottom:14px;border:1px solid var(--line);border-radius:15px;background:var(--paper);overflow:hidden}.catalog-table td{display:grid;grid-template-columns:92px 1fr;gap:10px;border-bottom:1px solid var(--line);padding:13px 15px}.catalog-table td:last-child{border:0}.catalog-table td::before{content:attr(data-label);color:var(--muted);font-size:calc(12px + var(--font-delta));font-weight:900}.catalog-table .empty-row{display:block}.catalog-table .empty-row::before{display:none}.catalog-links{flex-direction:row;flex-wrap:wrap}.footer-contact{display:grid;gap:18px}}
 
@@ -32,3 +46,14 @@ body{font-size:calc(16px + var(--font-delta))}
 .font-size-control button:focus-visible{outline:3px solid color-mix(in srgb,var(--blue) 35%,transparent);outline-offset:2px}
 .dashboard-header nav{flex-wrap:wrap;justify-content:flex-end}
 @media(max-width:560px){.font-size-control{order:-1}.font-size-control button{min-width:27px;height:27px}}
+
+/* 手機快速導覽：加上安全區域，避免被 iPhone 底部手勢列遮住。 */
+.mobile-navigation{display:none}
+@media(max-width:850px){
+  body{padding-bottom:calc(68px + env(safe-area-inset-bottom))}
+  .mobile-navigation{position:fixed;left:0;right:0;bottom:0;z-index:50;display:grid;grid-template-columns:repeat(3,1fr);padding:6px max(12px,env(safe-area-inset-left)) calc(6px + env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-right));border-top:1px solid var(--line);background:color-mix(in srgb,var(--paper) 94%,transparent);box-shadow:0 -10px 30px #09233f18;backdrop-filter:blur(14px)}
+  .mobile-navigation a{min-height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:12px;color:var(--muted);font-size:calc(14px + var(--font-delta));font-weight:800;line-height:1.1}
+  .mobile-navigation a:hover,.mobile-navigation a:focus-visible{background:var(--ice);color:var(--blue)}
+  .mobile-navigation a:focus-visible{outline:3px solid color-mix(in srgb,var(--blue) 35%,transparent);outline-offset:1px}
+  .mobile-navigation svg{width:21px;height:21px}
+}
