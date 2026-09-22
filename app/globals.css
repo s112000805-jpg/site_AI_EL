@@ -57,3 +57,43 @@ body{font-size:calc(16px + var(--font-delta))}
   .mobile-navigation a:focus-visible{outline:3px solid color-mix(in srgb,var(--blue) 35%,transparent);outline-offset:1px}
   .mobile-navigation svg{width:21px;height:21px}
 }
+
+/* 四步學習軌道：用階段色彩、圖示與連續線呈現從理解到追蹤的成果流程。 */
+.method-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:48px}
+.method-heading>p{max-width:390px;margin:0 0 4px;color:var(--muted);font-size:calc(16px + var(--font-delta))}
+.method-grid{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:42px;border:0;border-radius:0;overflow:visible}
+.method-grid::before{content:"";position:absolute;left:8%;right:8%;top:42px;height:2px;background:linear-gradient(90deg,#18a982,#397bc4,#d88a12,#8454bd);opacity:.35}
+.method-grid .method-card{--method-accent:#18a982;--method-soft:#e5f8f2;position:relative;min-height:250px;padding:24px 24px 26px;background:linear-gradient(145deg,var(--method-soft),var(--paper) 60%);border:1px solid color-mix(in srgb,var(--method-accent) 25%,var(--line));border-radius:22px;box-shadow:0 16px 40px #09233f0b;overflow:hidden;transition:transform .25s ease,box-shadow .25s ease}
+.method-grid .method-card::after{content:"";position:absolute;right:-36px;bottom:-48px;width:130px;height:130px;border:25px solid color-mix(in srgb,var(--method-accent) 10%,transparent);border-radius:50%}
+.method-grid .method-card:hover{transform:translateY(-5px);box-shadow:0 22px 45px #09233f18}
+.method-grid .method-card-02{--method-accent:#397bc4;--method-soft:#eaf3ff}
+.method-grid .method-card-03{--method-accent:#d88a12;--method-soft:#fff5df}
+.method-grid .method-card-04{--method-accent:#8454bd;--method-soft:#f3edfb}
+.method-card-top{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between}
+.method-card-top>b{color:var(--method-accent);font-size:calc(14px + var(--font-delta));letter-spacing:.12em}
+.method-icon{display:grid;place-items:center;width:56px;height:56px;color:#fff;background:var(--method-accent);border:6px solid var(--paper);border-radius:18px;box-shadow:0 9px 22px color-mix(in srgb,var(--method-accent) 28%,transparent)}
+.method-icon svg{width:25px;height:25px}
+.method-grid .method-card h3{position:relative;z-index:1;margin:30px 0 7px;color:var(--navy);font-size:calc(25px + var(--font-delta))}
+.method-grid .method-card p{position:relative;z-index:1;margin:0;color:var(--muted);font-size:calc(15px + var(--font-delta));line-height:1.75}
+.method-step{position:absolute;left:0;bottom:0;width:100%;height:5px;background:var(--method-accent)}
+html[data-theme="dark"] .method-grid{background:transparent}
+html[data-theme="dark"] .method-grid .method-card{--method-soft:#13362f;background:linear-gradient(145deg,var(--method-soft),#132333 65%)}
+html[data-theme="dark"] .method-grid .method-card-02{--method-soft:#172f4b}
+html[data-theme="dark"] .method-grid .method-card-03{--method-soft:#3b2b14}
+html[data-theme="dark"] .method-grid .method-card-04{--method-soft:#2c2340}
+html[data-theme="dark"] .method-icon{border-color:#132333}
+
+@media(max-width:850px){
+  .method-heading{align-items:flex-start;flex-direction:column;gap:18px}
+  .method-heading>p{max-width:620px}
+  .method-grid{grid-template-columns:repeat(2,1fr)}
+  .method-grid::before{display:none}
+  .method-grid .method-card{border:1px solid color-mix(in srgb,var(--method-accent) 25%,var(--line));min-height:230px}
+}
+@media(max-width:560px){
+  .method-section{padding:68px 0}
+  .method-grid{grid-template-columns:1fr;gap:14px;margin-top:30px}
+  .method-grid .method-card{min-height:0;padding:20px 22px 23px;border:1px solid color-mix(in srgb,var(--method-accent) 25%,var(--line))!important}
+  .method-grid .method-card h3{margin:18px 0 5px}
+  .method-icon{width:50px;height:50px;border-radius:16px}
+}

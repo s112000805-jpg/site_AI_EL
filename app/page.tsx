@@ -6,7 +6,21 @@ import Image from "next/image";
 import { CourseCatalog } from "@/app/components/course-catalog";
 import { ThemeToggle } from "@/app/components/theme-toggle";
 import { FontSizeControl } from "@/app/components/font-size-control";
-import { MessageCircle, Video } from "lucide-react";
+import {
+  BrainCircuit,
+  BriefcaseBusiness,
+  ChartNoAxesColumnIncreasing,
+  MessageCircle,
+  Wrench,
+  Video,
+} from "lucide-react";
+
+const learningMethods = [
+  { number: "01", title: "理解", description: "用生活化語言理解核心概念。", icon: BrainCircuit },
+  { number: "02", title: "練習", description: "跟著影片完成可重複的小任務。", icon: Wrench },
+  { number: "03", title: "產出", description: "交付一份能在工作中使用的成果。", icon: BriefcaseBusiness },
+  { number: "04", title: "追蹤", description: "登入後自動記錄進度與觀看時間。", icon: ChartNoAxesColumnIncreasing },
+];
 
 export const dynamic = "force-dynamic";
 
@@ -33,8 +47,24 @@ export default async function Home() {
         <div className="hero-visual"><Image src="/ai-course-hero.png" width={1024} height={1024} priority alt="成人使用筆記型電腦學習 AI 的課程情境" /><div className="hero-note"><b>你的學習紀錄</b><span>登入後自動累積實際觀看時間</span></div></div>
       </div></section>
 
-      <section id="method" className="method-section content-shell"><p className="eyebrow">LEARNING METHOD</p><h2>每個階段，都有看得見的成果</h2>
-        <div className="method-grid">{[["01","理解","用生活化語言理解核心概念。"],["02","練習","跟著影片完成可重複的小任務。"],["03","產出","交付一份能在工作中使用的成果。"],["04","追蹤","登入後自動記錄進度與觀看時間。"]].map(([n,t,d]) => <article key={n}><b>{n}</b><h3>{t}</h3><p>{d}</p></article>)}</div>
+      <section id="method" className="method-section content-shell">
+        <div className="method-heading">
+          <div><p className="eyebrow">LEARNING METHOD</p><h2>每個階段，都有看得見的成果</h2></div>
+          <p>不是只看完影片，而是把理解一步步轉化成能使用、能追蹤的工作成果。</p>
+        </div>
+        <div className="method-grid">
+          {learningMethods.map(({ number, title, description, icon: Icon }) => (
+            <article className={`method-card method-card-${number}`} key={number}>
+              <div className="method-card-top">
+                <span className="method-icon"><Icon aria-hidden="true" /></span>
+                <b>{number}</b>
+              </div>
+              <h3>{title}</h3>
+              <p>{description}</p>
+              <span className="method-step" aria-hidden="true" />
+            </article>
+          ))}
+        </div>
       </section>
 
       <div className="content-shell"><CourseCatalog /></div>
