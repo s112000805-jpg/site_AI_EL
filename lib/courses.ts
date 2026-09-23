@@ -7,6 +7,7 @@ export type Lesson = {
   durationLabel: string;
   startAt?: number;
   kind: string;
+  tags?: string[];
 };
 
 export type CourseStage = {
@@ -52,14 +53,14 @@ const applicationLessons = [
   createLesson({ id: "sOfvkU2wf-M", code: "AI-02-03", title: "DeepSeek R1 實用技巧", description: "認識推理模型的使用方式，學會為複雜問題補充條件並檢查推理結果。", durationSeconds: 198, kind: "工具實作" }),
   createLesson({ id: "XpiwDd0pa5s", code: "AI-02-04", title: "ChatGPT 進階實戰：五大關鍵功能", description: "整合 ChatGPT 的進階能力，提升研究、整理、寫作與多模態任務效率。", durationSeconds: 943, kind: "進階實作" }),
   createLesson({ id: "UhdPD5bTZ0E", code: "AI-02-05", title: "AI 電子郵件大師指南", description: "運用 AI 撰寫、改寫與檢查電子郵件，兼顧語氣、目的與收件者情境。", durationSeconds: 450, kind: "辦公實作" }),
-  createLesson({ id: "VmcqbM4S6g4", code: "AI-02-06", title: "AI 時代的簡報煉金術", description: "從內容架構到視覺表達，運用 AI 提升簡報規劃與製作效率。", durationSeconds: 385, kind: "辦公實作" }),
-  createLesson({ id: "ziOoo0aw8VM", code: "AI-02-07", title: "Canva 2026 五大神技", description: "掌握 Canva 的 AI 設計與內容功能，快速完成工作與報告所需視覺素材。", durationSeconds: 1011, kind: "設計實作" }),
-  createLesson({ id: "wq0ROlvLHZQ", code: "AI-02-08", title: "Canva 更新：從混亂到清晰", description: "整理新版 Canva 的介面與功能變化，建立更清楚的設計操作流程。", durationSeconds: 1143, kind: "設計實作" }),
+  createLesson({ id: "VmcqbM4S6g4", code: "AI-02-06", title: "AI 時代的簡報煉金術", description: "從內容架構到視覺表達，運用 AI 提升簡報規劃與製作效率。", durationSeconds: 385, kind: "辦公實作", tags: ["Canva／簡報"] }),
+  createLesson({ id: "ziOoo0aw8VM", code: "AI-02-07", title: "Canva 2026 五大神技", description: "掌握 Canva 的 AI 設計與內容功能，快速完成工作與報告所需視覺素材。", durationSeconds: 1011, kind: "設計實作", tags: ["Canva／簡報"] }),
+  createLesson({ id: "wq0ROlvLHZQ", code: "AI-02-08", title: "Canva 更新：從混亂到清晰", description: "整理新版 Canva 的介面與功能變化，建立更清楚的設計操作流程。", durationSeconds: 1143, kind: "設計實作", tags: ["Canva／簡報"] }),
   createLesson({ id: "-Pi4tzmMQU0", code: "AI-02-09", title: "第 2 課：讓 AI 幫你輕鬆做影片", description: "認識 AI 影片製作的基礎步驟，從文字構想到可觀看的影像內容。", durationSeconds: 152, kind: "影音入門" }),
   createLesson({ id: "5vuZqm8RBwo", code: "AI-02-10", title: "第 3 課：AI 幫助製作電影", description: "從故事、畫面到剪輯，理解 AI 如何參與簡易電影製作流程。", durationSeconds: 366, kind: "影音實作" }),
   createLesson({ id: "S2V-Zvm7CK4", code: "AI-02-11", title: "蘇格拉底私人學習教練", description: "用追問與反思設計個人化 AI 學習教練，強化理解而非只取得答案。", durationSeconds: 725, kind: "學習實作" }),
   createLesson({ id: "kRmJXErE5Bk", code: "AI-02-12", title: "拆解『留言 666 免費送文件』內容策略", description: "分析社群內容的引導與轉換設計，建立對 AI 行銷話術的判讀能力。", durationSeconds: 252, kind: "案例分析" }),
-  createLesson({ id: "bH5CXiHDfQw", code: "AI-02-13", title: "Canva AI 簡報生成完全解析", description: "完整理解 Canva AI 簡報生成流程，從內容規劃、版面產生到實際調整，提升簡報製作效率。", durationSeconds: 566, kind: "簡報實作" }),
+  createLesson({ id: "bH5CXiHDfQw", code: "AI-02-13", title: "Canva AI 簡報生成完全解析", description: "完整理解 Canva AI 簡報生成流程，從內容規劃、版面產生到實際調整，提升簡報製作效率。", durationSeconds: 566, kind: "簡報實作", tags: ["Canva／簡報"] }),
 ];
 
 const workflowLessons = [
