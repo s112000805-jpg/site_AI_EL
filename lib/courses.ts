@@ -59,6 +59,7 @@ const applicationLessons = [
   createLesson({ id: "5vuZqm8RBwo", code: "AI-02-10", title: "第 3 課：AI 幫助製作電影", description: "從故事、畫面到剪輯，理解 AI 如何參與簡易電影製作流程。", durationSeconds: 366, kind: "影音實作" }),
   createLesson({ id: "S2V-Zvm7CK4", code: "AI-02-11", title: "蘇格拉底私人學習教練", description: "用追問與反思設計個人化 AI 學習教練，強化理解而非只取得答案。", durationSeconds: 725, kind: "學習實作" }),
   createLesson({ id: "kRmJXErE5Bk", code: "AI-02-12", title: "拆解『留言 666 免費送文件』內容策略", description: "分析社群內容的引導與轉換設計，建立對 AI 行銷話術的判讀能力。", durationSeconds: 252, kind: "案例分析" }),
+  createLesson({ id: "bH5CXiHDfQw", code: "AI-02-13", title: "Canva AI 簡報生成完全解析", description: "完整理解 Canva AI 簡報生成流程，從內容規劃、版面產生到實際調整，提升簡報製作效率。", durationSeconds: 566, kind: "簡報實作" }),
 ];
 
 const workflowLessons = [
