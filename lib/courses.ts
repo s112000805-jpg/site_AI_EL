@@ -49,6 +49,7 @@ const foundationLessons = [
   createLesson({ id: "fvErigVhE9E", code: "AI-01-07", title: "如何使用 ChatGPT", description: "從輸入問題、補充背景到修正答案，掌握 ChatGPT 的基本使用流程。", durationSeconds: 241, kind: "入門實作", tags: ["ChatGPT", "提示工程"] }),
   createLesson({ id: "RpkLAulaMc0", code: "AI-01-08", title: "2 分鐘了解 ChatGPT", description: "快速掌握 ChatGPT 的運作概念、適用任務與使用時應注意的限制。", durationSeconds: 136, kind: "快速導讀", tags: ["ChatGPT", "AI 基礎"] }),
   createLesson({ id: "hvLbKydeHkw", code: "AI-01-09", title: "2026 AI 職缺市場：現實與金礦", description: "理解 AI 對職務與技能需求的影響，建立務實的學習方向與職涯判斷。", durationSeconds: 455, kind: "趨勢影片", tags: ["AI 職涯"] }),
+  createLesson({ id: "V2X1Jzuxm0s", code: "AI-01-10", title: "解密 LLM 文字生成過程", description: "用簡短導讀理解大型語言模型如何切分文字、預測下一個詞元並逐步生成回答。", durationSeconds: 35, kind: "快速導讀", contentType: "long", tags: ["AI 基礎", "資料與模型"] }),
 ];
 
 const applicationLessons = [
@@ -83,6 +84,7 @@ const workflowLessons = [
   createLesson({ id: "1WX3aZ_1fWg", code: "AI-03-13", title: "拯救手動跟進：一步步實現銷售自動化", description: "把名單、跟進與狀態更新串成自動化流程，降低重複操作與遺漏。", durationSeconds: 543, kind: "商務工作流", tags: ["自動化"] }),
   createLesson({ id: "ezHAgTET-lk", code: "AI-03-14", title: "部署 Flask App", description: "理解 Flask 應用從本機開發到上線服務的部署流程與常見檢查點。", durationSeconds: 449, kind: "部署實作", tags: ["AI 開發", "系統部署"] }),
   createLesson({ id: "Tx2De59szqM", code: "AI-03-15", title: "DNS 解密：CNAME 紀錄的重要性", description: "理解網域解析與 CNAME 的角色，補足網站部署與服務串接所需的網路知識。", durationSeconds: 404, kind: "系統基礎", tags: ["系統部署"] }),
+  createLesson({ id: "dTHz-Zqu4Gk", code: "AI-03-16", title: "AI 工程的三大時代", description: "從提示生成、協作式開發到代理化工程，理解 AI 軟體開發模式的演進。", durationSeconds: 29, kind: "快速導讀", contentType: "long", tags: ["AI 開發"] }),
 ];
 
 const systemLessons = [
@@ -101,6 +103,8 @@ const systemLessons = [
   createLesson({ id: "k93Z0kulyJg", code: "AI-04-13", title: "YOLO 的演進：從想法到框架", description: "從即時物件偵測理解資料增強、注意力機制，以及模型如何演進為可部署框架。", durationSeconds: 702, kind: "視覺模型", tags: ["資料與模型"] }),
   createLesson({ id: "lxzRCwRr6Wk", code: "AI-04-14", title: "SayCan：教導機器人理解現實世界", description: "理解語言模型如何結合機器人技能與環境限制，把指令轉換成可執行行動。", durationSeconds: 421, kind: "機器人專題", tags: ["機器人", "Agent／智能體"] }),
   createLesson({ id: "BO03wg4ynDo", code: "AI-04-15", title: "自主移動機器人 AMR：原理與未來", description: "從定位、導航、感測到任務調度，理解自主移動機器人的系統架構與應用。", durationSeconds: 1103, kind: "機器人專題", tags: ["機器人", "自動化"] }),
+  createLesson({ id: "zJBWPO_fjdM", code: "AI-04-16", title: "揭開 Pi Agent 極簡設計哲學", description: "從極簡核心、工具調用與上下文管理，理解 Pi Agent 的設計取捨與可擴充架構。", durationSeconds: 626, kind: "Agent 專題", contentType: "long", tags: ["Agent／智能體", "AI 開發"] }),
+  createLesson({ id: "v2N4Be96-eg", code: "AI-04-17", title: "Agent Skills 的運作邏輯", description: "理解 Agent Skills 如何封裝指令、工具與可重複流程，建立可維護的智能體能力模組。", durationSeconds: 508, kind: "技能架構", contentType: "long", tags: ["Agent／智能體", "自動化"] }),
 ];
 
 export const courseStages: CourseStage[] = [
