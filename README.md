@@ -109,6 +109,12 @@ SIWC establishes identity only; it does not prove workspace membership. Use the 
 
 Use SIWC for account pages, user-specific dashboards, saved records, and write actions tied to the current ChatGPT user. Leave public content anonymous.
 
+### 管理員名單
+
+正式環境以 `ADMIN_EMAILS` 設定管理員名單，可使用逗號、分號或換行分隔多個電子郵件地址。系統比對時會忽略大小寫、前後空白與重複項目。
+
+舊版的 `ADMIN_EMAIL` 仍會一起讀取，確保升級期間現有管理員不會失去權限。管理員信箱只設定在 Sites 執行環境，不要寫進程式碼或提交至 Git。
+
 ## Local D1 migrations
 
 For a D1-backed local preview, generate SQL with `npm run db:generate`. Build once through the Sites skill's build entrypoint (or `npm run build` for standalone use) to generate `dist/server/wrangler.json`, rebuilding if bindings change. From the project root, apply each pending migration in order:
