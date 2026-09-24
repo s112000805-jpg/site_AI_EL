@@ -56,6 +56,11 @@ body{font-size:calc(16px + var(--font-delta))}
   .mobile-navigation a:hover,.mobile-navigation a:focus-visible{background:var(--ice);color:var(--blue)}
   .mobile-navigation a:focus-visible{outline:3px solid color-mix(in srgb,var(--blue) 35%,transparent);outline-offset:1px}
   .mobile-navigation svg{width:21px;height:21px}
+  .hero-inner{min-height:0}
+  .hero-copy{padding:48px 24px 34px}
+  .hero-visual{height:270px;min-height:270px}
+  .hero-visual img{object-position:30% 38%}
+  .course-filters button{min-height:44px}
 }
 
 /* 四步學習軌道：用階段色彩、圖示與連續線呈現從理解到追蹤的成果流程。 */
@@ -91,6 +96,29 @@ html[data-theme="dark"] .method-icon{border-color:#132333}
   .method-grid .method-card{border:1px solid color-mix(in srgb,var(--method-accent) 25%,var(--line));min-height:230px}
 }
 @media(max-width:560px){
+  .content-shell{width:calc(100% - 32px)}
+  .brand b{white-space:nowrap}
+  .hero-copy{padding:42px 20px 30px}
+  .hero-copy h1{font-size:calc(38px + var(--font-heading-delta))}
+  .hero-lead{font-size:calc(16px + var(--font-delta))}
+  .hero-actions{display:grid;grid-template-columns:1fr 1fr;margin:24px 0}
+  .hero-actions a{min-height:48px;padding:11px 12px;text-align:center}
+  .hero-visual{height:230px;min-height:230px}
+  .hero-note{left:18px;right:18px;bottom:18px;padding:12px 15px}
+  .dashboard-header{align-items:stretch;flex-direction:column}
+  .dashboard-header nav{width:100%;justify-content:flex-start}
+  .dashboard-header nav>a{display:inline-flex;min-height:44px;align-items:center;padding:6px 4px}
+  .report-lessons article{align-items:flex-start;flex-direction:column}
+  .report-lessons article>a{align-self:stretch;min-height:44px;display:grid;place-items:center;border-radius:10px;background:var(--ice)}
+  .admin-panel .table-wrap{overflow:visible}
+  .admin-panel table{min-width:0}
+  .admin-panel thead{display:none}
+  .admin-panel table,.admin-panel tbody,.admin-panel tr,.admin-panel td{display:block;width:100%}
+  .admin-panel tr{margin-bottom:14px;border:1px solid var(--line);border-radius:15px;background:var(--paper);overflow:hidden}
+  .admin-panel td{display:grid;grid-template-columns:105px minmax(0,1fr);gap:10px;padding:13px 15px;overflow-wrap:anywhere}
+  .admin-panel td::before{content:attr(data-label);color:var(--muted);font-size:calc(12px + var(--font-delta));font-weight:900}
+  .admin-panel .empty-row{display:block}
+  .admin-panel .empty-row::before{display:none}
   .method-section{padding:68px 0}
   .method-grid{grid-template-columns:1fr;gap:14px;margin-top:30px}
   .method-grid .method-card{min-height:0;padding:20px 22px 23px;border:1px solid color-mix(in srgb,var(--method-accent) 25%,var(--line))!important}

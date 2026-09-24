@@ -44,7 +44,7 @@ export default async function Home() {
           <div className="hero-actions"><a className="primary-action" href="#course-map">查看課程地圖</a><a className="secondary-action" href="/progress">查看學習成果</a></div>
           <div className="hero-facts"><span><b>4</b> 個階段</span><span><b>{lessons.length}</b> 部影片</span><span><b>{totalMinutes}</b> 分鐘影片</span></div>
         </div>
-        <div className="hero-visual"><Image src="/ai-course-hero.png" width={1024} height={1024} priority alt="成人使用筆記型電腦學習 AI 的課程情境" /><div className="hero-note"><b>你的學習紀錄</b><span>登入後自動累積實際觀看時間</span></div></div>
+        <div className="hero-visual"><Image src="/ai-course-hero.png" width={1024} height={1024} sizes="(max-width: 850px) 100vw, 50vw" priority alt="成人使用筆記型電腦學習 AI 的課程情境" /><div className="hero-note"><b>你的學習紀錄</b><span>登入後自動累積實際觀看時間</span></div></div>
       </div></section>
 
       <section id="method" className="method-section content-shell">
