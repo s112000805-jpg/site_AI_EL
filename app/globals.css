@@ -125,3 +125,46 @@ html[data-theme="dark"] .method-icon{border-color:#132333}
   .method-grid .method-card h3{margin:18px 0 5px}
   .method-icon{width:50px;height:50px;border-radius:16px}
 }
+
+/* 課程題組：延續既有卡片語言，答案與錯題狀態在手機上也保持清楚。 */
+.lesson-quiz{border-top:1px solid var(--line);background:var(--paper)}
+.lesson-quiz>summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 20px;background:var(--ice)}
+.lesson-quiz>summary::-webkit-details-marker{display:none}
+.lesson-quiz>summary span{display:grid}
+.lesson-quiz>summary b{color:var(--navy);font-size:calc(15px + var(--font-delta))}
+.lesson-quiz>summary small{color:var(--muted);font-size:calc(12px + var(--font-delta));font-weight:500}
+.lesson-quiz>summary strong{white-space:nowrap;color:var(--blue);font-size:calc(13px + var(--font-delta))}
+.quiz-body{padding:18px}
+.quiz-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.quiz-tabs button{border:1px solid var(--line);border-radius:11px;padding:10px 12px;background:var(--paper);color:var(--ink);font-weight:900;cursor:pointer}
+.quiz-tabs button.is-active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.quiz-tabs small{display:block;margin-top:2px;font-weight:500}
+.quiz-questions{display:grid;gap:14px}
+.quiz-questions fieldset{margin:0;padding:16px;border:1px solid var(--line);border-radius:12px}
+.quiz-questions fieldset.is-correct{border-color:#20a77e;background:#eefbf6}
+.quiz-questions fieldset.is-wrong{border-color:#d26060;background:#fff4f4}
+.quiz-questions legend{padding:0 6px;font-weight:900;color:var(--navy)}
+.quiz-questions legend>span{display:inline-grid;place-items:center;width:25px;height:25px;margin-right:8px;border-radius:50%;background:var(--mint);color:#08243f}
+.quiz-questions label{display:flex;gap:9px;align-items:flex-start;margin:8px 0;padding:7px 9px;border-radius:8px;cursor:pointer}
+.quiz-questions label:hover{background:var(--ice)}
+.quiz-questions input{margin-top:5px;accent-color:var(--blue)}
+.quiz-explanation{margin-top:12px;padding:12px;border-radius:10px;background:var(--ice)}
+.quiz-explanation p{margin:4px 0;color:var(--ink)}
+.quiz-explanation small{color:var(--muted)}
+.quiz-submit,.quiz-signin,.quiz-result{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+.quiz-submit button,.quiz-result button,.quiz-signin a{border:0;border-radius:10px;padding:10px 15px;background:var(--navy);color:#fff;font-weight:900;cursor:pointer}
+.quiz-submit button:disabled{opacity:.5;cursor:not-allowed}
+.quiz-submit span,.quiz-signin span,.quiz-result span{color:var(--muted);font-size:calc(13px + var(--font-delta))}
+.quiz-result b{color:var(--navy)}
+.quiz-report-line{color:var(--blue)!important;font-weight:800}
+html[data-theme="dark"] .quiz-questions fieldset.is-correct{background:#12352e}
+html[data-theme="dark"] .quiz-questions fieldset.is-wrong{background:#3a2025}
+
+@media(max-width:560px){
+  .lesson-quiz>summary{align-items:flex-start;padding:15px}
+  .lesson-quiz>summary strong{display:none}
+  .quiz-body{padding:14px}
+  .quiz-tabs{grid-template-columns:1fr}
+  .quiz-submit,.quiz-signin,.quiz-result{align-items:stretch;flex-direction:column}
+  .quiz-submit button,.quiz-result button,.quiz-signin a{min-height:44px;text-align:center}
+}

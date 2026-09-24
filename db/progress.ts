@@ -2,6 +2,7 @@ import "server-only";
 import type { ChatGPTUser } from "@/app/chatgpt-auth";
 import { findLesson, lessons } from "@/lib/courses";
 import { getD1 } from "./index";
+import type { QuizType } from "@/lib/quizzes";
 
 export type ProgressRow = {
   lesson_id: string;
@@ -70,6 +71,62 @@ export async function recordProgress(
   return { lessonId, watchedSeconds: watched, positionSeconds: position, status };
 }
 
+export type QuizAttemptRow = {
+  id: number;
+  lesson_id: string;
+  quiz_type: QuizType;
+  score: number;
+  max_score: number;
+  wrong_question_ids: string;
+  submitted_at: string;
+};
+
+export async function recordQuizAttempt(user: ChatGPTUser, lessonId: string, quizType: QuizType, score: number, maxScore: number, wrongQuestionIds: string[], answers: Record<string, unknown>) {
+  if (!findLesson(lessonId)) throw new Error("找不到指定的課程影片");
+  await ensureLearner(user);
+  await getD1().prepare(`
+    INSERT INTO quiz_attempts
+      (user_id, lesson_id, quiz_type, score, max_score, wrong_question_ids, answers_json, submitted_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+  `).bind(user.userId, lessonId, quizType, score, maxScore, JSON.stringify(wrongQuestionIds), JSON.stringify(answers)).run();
+}
+
+export async function getUserQuizAttempts(user: ChatGPTUser): Promise<QuizAttemptRow[]> {
+  await ensureLearner(user);
+  const result = await getD1().prepare(`
+    SELECT id, lesson_id, quiz_type, score, max_score, wrong_question_ids, submitted_at
+    FROM quiz_attempts WHERE user_id = ? ORDER BY submitted_at DESC, id DESC
+  `).bind(user.userId).all<QuizAttemptRow>();
+  return result.results ?? [];
+}
+
+export async function getQuizAttemptsForLearner(userId: string): Promise<QuizAttemptRow[]> {
+  const result = await getD1().prepare(`
+    SELECT id, lesson_id, quiz_type, score, max_score, wrong_question_ids, submitted_at
+    FROM quiz_attempts WHERE user_id = ? ORDER BY submitted_at DESC, id DESC
+  `).bind(userId).all<QuizAttemptRow>();
+  return result.results ?? [];
+}
+
+export function latestQuizAttemptMap(rows: QuizAttemptRow[]) {
+  const map = new Map<string, QuizAttemptRow>();
+  for (const row of rows) {
+    const key = `${row.lesson_id}:${row.quiz_type}`;
+    if (!map.has(key)) map.set(key, row);
+  }
+  return map;
+}
+
+export function parseWrongQuestionIds(row?: QuizAttemptRow) {
+  if (!row) return [] as string[];
+  try {
+    const value = JSON.parse(row.wrong_question_ids);
+    return Array.isArray(value) ? value.filter((item): item is string => typeof item === "string") : [];
+  } catch {
+    return [] as string[];
+  }
+}
+
 export type AdminLearnerRow = {
   user_id: string;
   email: string;
@@ -110,6 +167,7 @@ export async function getAdminLearners(): Promise<AdminLearnerRow[]> {
 export async function getAdminLearnerReport(userId: string): Promise<{
   learner: LearnerProfile;
   progress: ProgressRow[];
+  quizAttempts: QuizAttemptRow[];
 } | null> {
   const learner = await getD1().prepare(`
     SELECT user_id, email, display_name, created_at, updated_at
@@ -121,7 +179,8 @@ export async function getAdminLearnerReport(userId: string): Promise<{
     SELECT lesson_id, watched_seconds, last_position_seconds, status, completed_at, updated_at
     FROM learning_progress WHERE user_id = ? ORDER BY updated_at DESC
   `).bind(userId).all<ProgressRow>();
-  return { learner, progress: progress.results ?? [] };
+  const quizAttempts = await getQuizAttemptsForLearner(userId);
+  return { learner, progress: progress.results ?? [], quizAttempts };
 }
 
 export type LearnerStatusFilter = "all" | "completed" | "in_progress" | "not_started";

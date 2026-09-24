@@ -8,6 +8,13 @@
       "when": 1789272488381,
       "tag": "0000_rapid_firebrand",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1790249551224,
+      "tag": "0001_tense_thanos",
+      "breakpoints": true
     }
   ]
 }

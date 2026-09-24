@@ -1,6 +1,9 @@
 import { CourseVideo } from "@/app/components/course-video";
+import { LessonQuiz } from "@/app/components/lesson-quiz";
 import { chatGPTSignInPath, chatGPTSignOutPath, getChatGPTUser } from "@/app/chatgpt-auth";
 import { courseStages, lessons } from "@/lib/courses";
+import { buildLessonQuiz, toPublicQuestions } from "@/lib/quizzes";
+import { getUserQuizAttempts, latestQuizAttemptMap, parseWrongQuestionIds } from "@/db/progress";
 import { isAdminUser } from "@/lib/authz";
 import Image from "next/image";
 import { CourseCatalog } from "@/app/components/course-catalog";
@@ -26,6 +29,8 @@ export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const user = await getChatGPTUser();
+  const quizAttempts = user ? await getUserQuizAttempts(user) : [];
+  const latestAttempts = latestQuizAttemptMap(quizAttempts);
   const totalMinutes = Math.round(lessons.reduce((sum, lesson) => sum + lesson.durationSeconds, 0) / 60);
   return <>
     <header className="topbar">
@@ -73,7 +78,14 @@ export default async function Home() {
         <div className="stage-list">{courseStages.map((stage, index) => <details className={`course-stage stage-tone-${index + 1}`} key={stage.id} open={index === 0}>
           <summary><span className="stage-number">{stage.number}</span><span><small>{stage.className}</small><b>{stage.title}</b><em>{stage.subtitle}</em></span><strong>{stage.hours}</strong></summary>
           <div className="stage-body"><div className="stage-intro"><p>{stage.objective}</p><div className="topic-grid">{stage.topics.map((topic) => <article key={topic.title}><b>{topic.title}</b><span>{topic.detail}</span></article>)}</div><p className="project"><b>階段成果</b>{stage.project}</p></div>
-            <div className="lesson-list">{stage.lessons.length ? stage.lessons.map((lesson) => <article className="lesson-card" id={`lesson-${lesson.id}`} key={lesson.id}><div className="lesson-heading"><span>{lesson.code} · {lesson.kind} · {lesson.durationLabel}</span><h3>{lesson.title}</h3><p>{lesson.description}</p></div><CourseVideo lessonId={lesson.id} title={lesson.title} startAt={lesson.startAt} signedIn={Boolean(user)} /></article>) : <div className="coming-soon"><b>實作課程準備中</b><p>本階段將加入提示設計、辦公應用與多模態練習。</p></div>}</div>
+            <div className="lesson-list">{stage.lessons.length ? stage.lessons.map((lesson) => {
+              const quiz = buildLessonQuiz(lesson);
+              const attemptSummary = (type: "pre" | "post") => {
+                const attempt = latestAttempts.get(`${lesson.id}:${type}`);
+                return attempt ? { score: Number(attempt.score), maxScore: Number(attempt.max_score), wrongCount: parseWrongQuestionIds(attempt).length } : null;
+              };
+              return <article className="lesson-card" id={`lesson-${lesson.id}`} key={lesson.id}><div className="lesson-heading"><span>{lesson.code} · {lesson.kind} · {lesson.durationLabel}</span><h3>{lesson.title}</h3><p>{lesson.description}</p></div><CourseVideo lessonId={lesson.id} title={lesson.title} startAt={lesson.startAt} signedIn={Boolean(user)} /><LessonQuiz lessonId={lesson.id} lessonCode={lesson.code} questions={{ pre: toPublicQuestions(quiz.pre), post: toPublicQuestions(quiz.post) }} sourceNote={quiz.sourceNote} signedIn={Boolean(user)} signInHref={chatGPTSignInPath(`/#lesson-${lesson.id}`)} initialAttempts={{ pre: attemptSummary("pre"), post: attemptSummary("post") }} /></article>;
+            }) : <div className="coming-soon"><b>實作課程準備中</b><p>本階段將加入提示設計、辦公應用與多模態練習。</p></div>}</div>
           </div>
         </details>)}</div>
       </div></section>
