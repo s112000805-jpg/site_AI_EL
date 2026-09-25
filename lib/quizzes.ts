@@ -21,8 +21,33 @@ export type LessonQuiz = {
   sourceNote: string;
 };
 
+const notebookLmQuizOverrides: Record<string, LessonQuiz> = {
+  "v2N4Be96-eg": {
+    objectives: [
+      "能說明模型與 Harness 在 Agent 中的不同責任",
+      "能辨識 Harness 六個架構層的用途",
+      "能用獨立評估與恢復機制診斷 Agent 失敗",
+    ],
+    sourceNote: "依 NotebookLM 匯入的影片逐字稿建立，題目與答案已按來源內容整理。",
+    pre: [
+      { id: "AI-04-17-pre-1", prompt: "當 AI Agent 偶爾成功、偶爾失敗時，最值得先檢查的是什麼？", options: ["只把模型換成更昂貴的版本", "任務流程、工具與錯誤處理是否清楚", "讓 Agent 自己判定每次都成功", "增加無關背景資料"], correctIndex: 1, explanation: "穩定性不只取決於模型，也取決於外圍流程、工具與恢復機制。", objective: "能說明模型與 Harness 在 Agent 中的不同責任" },
+      { id: "AI-04-17-pre-2", prompt: "下列哪一項最接近『執行編排』？", options: ["替模型購買更多運算資源", "把所有資料一次交給模型", "規定理解、檢查、輸出與驗證的步驟", "刪除所有執行紀錄"], correctIndex: 2, explanation: "執行編排像替 Agent 鋪設軌道，讓任務依明確步驟進行。", objective: "能辨識 Harness 六個架構層的用途" },
+      { id: "AI-04-17-pre-3", prompt: "讓 Agent 自己替自己的答案打分，最可能出現哪個問題？", options: ["評估一定更客觀", "執行速度一定變慢", "資料一定會遺失", "容易過度樂觀而忽略錯誤"], correctIndex: 3, explanation: "生成者與評估者若沒有分離，Agent 可能高估自己的成果。", objective: "能用獨立評估與恢復機制診斷 Agent 失敗" },
+    ],
+    post: [
+      { id: "AI-04-17-post-1", prompt: "影片中的 Harness 方程式，如何描述一個完整的 Agent？", options: ["模型 + Harness 外圍系統", "提示詞 + 更長的提示詞", "資料庫 + 網頁介面", "模型 + 人工逐題代答"], correctIndex: 0, explanation: "模型負責思考，Harness 負責讓想法穩定轉化成可執行的成果。", objective: "能說明模型與 Harness 在 Agent 中的不同責任" },
+      { id: "AI-04-17-post-2", prompt: "下列哪一項不是影片所列的 Harness 六個架構層？", options: ["資訊邊界", "工具系統", "模型定價", "約束與恢復"], correctIndex: 2, explanation: "六層包含資訊邊界、工具系統、執行編排、記憶管理、評估觀測、約束恢復；模型定價不在其中。", objective: "能辨識 Harness 六個架構層的用途" },
+      { id: "AI-04-17-post-3", prompt: "某 Agent 常在未確認資料前直接輸出。依影片觀念，哪個改善最合適？", options: ["增加更多無關資料", "建立先理解目標、再檢查資訊、最後驗證的 SOP", "讓 Agent 自行宣告任務成功", "取消所有限制以增加自由度"], correctIndex: 1, explanation: "執行編排用硬性 SOP 約束步驟，避免 Agent 跳過必要檢查。", objective: "能辨識 Harness 六個架構層的用途" },
+      { id: "AI-04-17-post-4", prompt: "客服 Agent 每次都替自己打滿分，但顧客滿意度很低。應優先採取哪個做法？", options: ["改成讓同一 Agent 多評一次", "刪除負面顧客回饋", "只增加提示詞長度", "把生成與評估分離，由獨立 QA 機制檢查"], correctIndex: 3, explanation: "影片強調不能讓 AI 自己改自己的考卷，應把生成與評估機制分離。", objective: "能用獨立評估與恢復機制診斷 Agent 失敗" },
+      { id: "AI-04-17-post-5", prompt: "當外部 API 失敗時，哪一項最符合『約束與恢復』的設計？", options: ["自動回滾到安全步驟並改走替代路徑", "忽略錯誤並假裝完成", "無限重複相同請求", "刪除所有執行紀錄"], correctIndex: 0, explanation: "約束與恢復層要能在失敗時停止、回滾，並選擇可控的替代路徑。", objective: "能用獨立評估與恢復機制診斷 Agent 失敗" },
+    ],
+  },
+};
+
 /** 依課程目標產生固定題組；答案只在伺服器端批改後回傳。 */
 export function buildLessonQuiz(lesson: Lesson): LessonQuiz {
+  const notebookLmQuiz = notebookLmQuizOverrides[lesson.id];
+  if (notebookLmQuiz) return notebookLmQuiz;
   const tag = lesson.tags?.[0] ?? "AI 應用";
   const otherTitles = distractors(lesson, (item) => item.title);
   const otherDescriptions = distractors(lesson, (item) => item.description);
@@ -66,7 +91,11 @@ export function toPublicQuestions(questions: QuizQuestion[]): PublicQuizQuestion
 }
 
 function question(lesson: Lesson, type: QuizType, number: number, prompt: string, options: string[], correctIndex: number, explanation: string, objective: string): QuizQuestion {
-  return { id: `${lesson.code}-${type}-${number}`, prompt, options, correctIndex, explanation, objective };
+  // 依題號旋轉選項，避免學員只靠固定答案位置猜題。
+  const offset = (number + (type === "post" ? 1 : 0)) % options.length;
+  const rotatedOptions = [...options.slice(offset), ...options.slice(0, offset)];
+  const rotatedCorrectIndex = (correctIndex - offset + options.length) % options.length;
+  return { id: `${lesson.code}-${type}-${number}`, prompt, options: rotatedOptions, correctIndex: rotatedCorrectIndex, explanation, objective };
 }
 
 function distractors(lesson: Lesson, select: (item: Lesson) => string): string[] {

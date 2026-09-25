@@ -104,7 +104,7 @@ const systemLessons = [
   createLesson({ id: "lxzRCwRr6Wk", code: "AI-04-14", title: "SayCan：教導機器人理解現實世界", description: "理解語言模型如何結合機器人技能與環境限制，把指令轉換成可執行行動。", durationSeconds: 421, kind: "機器人專題", tags: ["機器人", "Agent／智能體"] }),
   createLesson({ id: "BO03wg4ynDo", code: "AI-04-15", title: "自主移動機器人 AMR：原理與未來", description: "從定位、導航、感測到任務調度，理解自主移動機器人的系統架構與應用。", durationSeconds: 1103, kind: "機器人專題", tags: ["機器人", "自動化"] }),
   createLesson({ id: "zJBWPO_fjdM", code: "AI-04-16", title: "揭開 Pi Agent 極簡設計哲學", description: "從極簡核心、工具調用與上下文管理，理解 Pi Agent 的設計取捨與可擴充架構。", durationSeconds: 626, kind: "Agent 專題", contentType: "long", tags: ["Agent／智能體", "AI 開發"] }),
-  createLesson({ id: "v2N4Be96-eg", code: "AI-04-17", title: "Agent Skills 的運作邏輯", description: "理解 Agent Skills 如何封裝指令、工具與可重複流程，建立可維護的智能體能力模組。", durationSeconds: 508, kind: "技能架構", contentType: "long", tags: ["Agent／智能體", "自動化"] }),
+  createLesson({ id: "v2N4Be96-eg", code: "AI-04-17", title: "Harness 工程：提升 AI Agent 穩定性的關鍵", description: "理解模型之外的 Harness 外圍系統，從資訊邊界、工具、執行編排、記憶、評估到錯誤恢復，提升 Agent 的可靠性。", durationSeconds: 508, kind: "Agent 架構", contentType: "long", tags: ["Agent／智能體", "自動化"] }),
 ];
 
 export const courseStages: CourseStage[] = [

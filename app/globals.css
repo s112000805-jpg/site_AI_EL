@@ -51,7 +51,7 @@ body{font-size:calc(16px + var(--font-delta))}
 .mobile-navigation{display:none}
 @media(max-width:850px){
   body{padding-bottom:calc(68px + env(safe-area-inset-bottom))}
-  .mobile-navigation{position:fixed;left:0;right:0;bottom:0;z-index:50;display:grid;grid-template-columns:repeat(3,1fr);padding:6px max(12px,env(safe-area-inset-left)) calc(6px + env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-right));border-top:1px solid var(--line);background:color-mix(in srgb,var(--paper) 94%,transparent);box-shadow:0 -10px 30px #09233f18;backdrop-filter:blur(14px)}
+  .mobile-navigation{position:fixed;left:0;right:0;bottom:0;z-index:50;display:grid;grid-template-columns:repeat(4,1fr);padding:6px max(12px,env(safe-area-inset-left)) calc(6px + env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-right));border-top:1px solid var(--line);background:color-mix(in srgb,var(--paper) 94%,transparent);box-shadow:0 -10px 30px #09233f18;backdrop-filter:blur(14px)}
   .mobile-navigation a{min-height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:12px;color:var(--muted);font-size:calc(14px + var(--font-delta));font-weight:800;line-height:1.1}
   .mobile-navigation a:hover,.mobile-navigation a:focus-visible{background:var(--ice);color:var(--blue)}
   .mobile-navigation a:focus-visible{outline:3px solid color-mix(in srgb,var(--blue) 35%,transparent);outline-offset:1px}
@@ -174,4 +174,46 @@ html[data-theme="dark"] .quiz-questions fieldset.is-wrong{background:#3a2025}
   .quiz-review-action{align-items:stretch;flex-direction:column}
   .quiz-review-action button,.quiz-result-actions button{min-height:44px}
   .quiz-result-actions,.export-actions{display:grid;width:100%}
+}
+
+/* 獨立題庫：第一屏直接提供階段、科目與題目，保留既有品牌與深色模式。 */
+.quiz-bank-page{min-height:100vh;padding:32px clamp(18px,4vw,64px) 110px;background:linear-gradient(180deg,var(--ice),var(--paper) 280px)}
+.quiz-bank-header{max-width:1280px;margin:0 auto 28px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.quiz-bank-header>a:first-child{display:flex;align-items:center;gap:7px;color:var(--muted);font-weight:800;text-decoration:none}
+.quiz-bank-header>a:first-child svg{width:18px}
+.quiz-bank-header>div{display:flex;align-items:center;gap:16px;flex:1;max-width:660px}
+.quiz-bank-header h1{margin:2px 0;font-size:clamp(30px,4vw,48px);color:var(--navy)}
+.quiz-bank-header p{margin:0;color:var(--muted)}
+.quiz-bank-mark{display:grid;place-items:center;flex:0 0 58px;height:58px;border-radius:18px;background:var(--navy);color:#fff}
+.quiz-bank-mark svg{width:30px;height:30px}
+.quiz-bank-layout{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:minmax(270px,340px) minmax(0,1fr);gap:24px;align-items:start}
+.quiz-bank-picker{position:sticky;top:22px;display:grid;gap:14px;padding:20px;border:1px solid var(--line);border-radius:20px;background:var(--paper);box-shadow:0 18px 50px rgba(9,35,63,.08)}
+.quiz-bank-field{display:grid;gap:7px}
+.quiz-bank-field label{font-size:calc(14px + var(--font-delta));font-weight:900;color:var(--navy)}
+.quiz-bank-field select{width:100%;min-height:46px;padding:0 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);font:inherit}
+.quiz-bank-course-card{display:grid;gap:7px;margin-top:4px;padding:18px;border-radius:15px;background:var(--navy);color:#fff}
+.quiz-bank-course-card>span{font-size:calc(13px + var(--font-delta));color:#9fd8ff}
+.quiz-bank-course-card h2{margin:0;font-size:calc(21px + var(--font-delta));line-height:1.3}
+.quiz-bank-course-card p{margin:0;color:#d8e7f4}
+.quiz-bank-course-card small{color:#b7d3e8}
+.quiz-bank-paper{padding:26px;border:1px solid var(--line);border-radius:20px;background:var(--paper);box-shadow:0 18px 50px rgba(9,35,63,.08)}
+.quiz-bank-paper-heading{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid var(--line)}
+.quiz-bank-paper-heading span{color:var(--blue);font-weight:900}
+.quiz-bank-paper-heading h1{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px)}
+.quiz-bank-paper-heading>b{white-space:nowrap;padding:8px 12px;border-radius:999px;background:var(--mint);color:#08243f}
+.quiz-bank-empty{max-width:800px;margin:60px auto;text-align:center;color:var(--muted)}
+html[data-theme="dark"] .quiz-bank-page{background:linear-gradient(180deg,#102538,var(--paper) 280px)}
+
+@media(max-width:760px){
+  .quiz-bank-page{padding:18px 14px 110px}
+  .quiz-bank-header{align-items:flex-start;display:grid}
+  .quiz-bank-header>div{grid-row:1}
+  .quiz-bank-header>a:first-child{grid-row:2}
+  .quiz-bank-header>.secondary-action{grid-row:2;justify-self:end}
+  .quiz-bank-mark{flex-basis:48px;height:48px}
+  .quiz-bank-layout{grid-template-columns:1fr}
+  .quiz-bank-picker{position:static}
+  .quiz-bank-paper{padding:16px}
+  .quiz-bank-paper-heading{display:grid}
+  .quiz-bank-paper-heading>b{justify-self:start}
 }
