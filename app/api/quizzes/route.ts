@@ -1,5 +1,5 @@
 import { getChatGPTUser } from "@/app/chatgpt-auth";
-import { recordQuizAttempt } from "@/db/progress";
+import { getLatestQuizAttempt, parseWrongQuestionIds, recordQuizAttempt } from "@/db/progress";
 import { getQuizQuestions, type QuizType } from "@/lib/quizzes";
 
 export const dynamic = "force-dynamic";
@@ -13,7 +13,16 @@ export async function POST(request: Request) {
     if (body.quizType !== "pre" && body.quizType !== "post") throw new Error("題組類型不正確");
     if (!body.answers || typeof body.answers !== "object" || Array.isArray(body.answers)) throw new Error("作答資料不完整");
     const quizType = body.quizType as QuizType;
-    const questions = getQuizQuestions(body.lessonId, quizType);
+    const allQuestions = getQuizQuestions(body.lessonId, quizType);
+    const isWrongOnly = body.questionIds !== undefined;
+    const requestedIds = Array.isArray(body.questionIds) ? body.questionIds.filter((item): item is string => typeof item === "string") : allQuestions.map((item) => item.id);
+    if (!requestedIds.length || requestedIds.some((id) => !allQuestions.some((question) => question.id === id))) throw new Error("錯題範圍不正確");
+    if (isWrongOnly && requestedIds.length !== allQuestions.length) {
+      const previous = await getLatestQuizAttempt(user.userId, body.lessonId, quizType);
+      const wrongIds = parseWrongQuestionIds(previous);
+      if (requestedIds.length !== wrongIds.length || !requestedIds.every((id) => wrongIds.includes(id))) throw new Error("錯題範圍已變更，請重新整理頁面");
+    }
+    const questions = allQuestions.filter((question) => requestedIds.includes(question.id));
     const submitted = body.answers as Record<string, unknown>;
     if (questions.some((question) => !Number.isInteger(submitted[question.id]))) throw new Error("請完成所有題目後再提交");
     const details = questions.map((question) => {

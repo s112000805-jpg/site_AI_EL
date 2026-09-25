@@ -1,6 +1,7 @@
 import { getChatGPTUser } from "@/app/chatgpt-auth";
-import { filterAdminLearners, getAdminLearnerReport, getAdminLearners, type LearnerStatusFilter, totalLessonCount } from "@/db/progress";
-import { formatDuration, lessons } from "@/lib/courses";
+import { filterAdminLearners, getAdminLearnerReport, getAdminLearners, getAdminQuizAttempts, parseWrongQuestionIds, type LearnerStatusFilter, totalLessonCount } from "@/db/progress";
+import { findLesson, formatDuration, lessons } from "@/lib/courses";
+import { getQuizQuestions, type QuizType } from "@/lib/quizzes";
 import { isAdminUser } from "@/lib/authz";
 
 export const dynamic = "force-dynamic";
@@ -11,6 +12,32 @@ export async function GET(request: Request) {
   if (!isAdminUser(admin)) return Response.json({ error: "沒有管理者權限" }, { status: 403 });
   const url = new URL(request.url);
   const userId = url.searchParams.get("userId");
+  const reportType = url.searchParams.get("type");
+
+  if (reportType === "wrong") {
+    if (userId && !await getAdminLearnerReport(userId)) return Response.json({ error: "找不到學員" }, { status: 404 });
+    const attempts = (await getAdminQuizAttempts()).filter((row) => !userId || row.user_id === userId);
+    const latest = new Map<string, (typeof attempts)[number]>();
+    for (const row of attempts) {
+      const key = `${row.user_id}:${row.lesson_id}:${row.quiz_type}`;
+      if (!latest.has(key)) latest.set(key, row);
+    }
+    const rows = [...latest.values()].flatMap((attempt) => {
+      const lesson = findLesson(attempt.lesson_id);
+      if (!lesson) return [];
+      const questions = getQuizQuestions(attempt.lesson_id, attempt.quiz_type as QuizType);
+      const answers = parseAnswers(attempt.answers_json);
+      return parseWrongQuestionIds(attempt).flatMap((questionId) => {
+        const question = questions.find((item) => item.id === questionId);
+        if (!question) return [];
+        const selected = answers[questionId];
+        const selectedIndex = typeof selected === "number" ? selected : NaN;
+        return [[attempt.display_name, attempt.email, lesson.code, lesson.title, attempt.quiz_type === "pre" ? "課前診斷" : "課後複習", question.id, question.prompt, Number.isInteger(selectedIndex) ? question.options[selectedIndex] ?? "未作答" : "未作答", question.options[question.correctIndex], question.objective, attempt.submitted_at]];
+      });
+    });
+    const filename = userId ? `wrong-questions-${safeFilePart(attempts[0]?.email ?? "learner")}.csv` : "wrong-questions-report.csv";
+    return csvResponse(filename, [["學員姓名", "Email", "課程編號", "課程名稱", "題組", "題目編號", "題目", "學員答案", "正確答案", "學習目標", "最近作答時間"], ...rows]);
+  }
 
   if (userId) {
     const report = await getAdminLearnerReport(userId);
@@ -41,9 +68,21 @@ function csvResponse(filename: string, rows: Array<Array<string | number>>) {
 }
 
 function csvCell(value: string | number) {
-  return `"${String(value).replaceAll('"', '""')}"`;
+  const cell = String(value);
+  // 避免試算表將學員輸入的姓名或 Email 當成公式執行。
+  const safeCell = /^[=+\-@\t\r]/.test(cell) ? `'${cell}` : cell;
+  return `"${safeCell.replaceAll('"', '""')}"`;
 }
 
 function safeFilePart(value: string) {
   return value.toLowerCase().replace(/[^a-z0-9._-]+/g, "-").slice(0, 64) || "report";
+}
+
+function parseAnswers(value: string): Record<string, unknown> {
+  try {
+    const parsed = JSON.parse(value);
+    return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed as Record<string, unknown> : {};
+  } catch {
+    return {};
+  }
 }

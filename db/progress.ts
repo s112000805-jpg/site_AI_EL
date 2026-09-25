@@ -78,6 +78,7 @@ export type QuizAttemptRow = {
   score: number;
   max_score: number;
   wrong_question_ids: string;
+  answers_json: string;
   submitted_at: string;
 };
 
@@ -94,15 +95,23 @@ export async function recordQuizAttempt(user: ChatGPTUser, lessonId: string, qui
 export async function getUserQuizAttempts(user: ChatGPTUser): Promise<QuizAttemptRow[]> {
   await ensureLearner(user);
   const result = await getD1().prepare(`
-    SELECT id, lesson_id, quiz_type, score, max_score, wrong_question_ids, submitted_at
+    SELECT id, lesson_id, quiz_type, score, max_score, wrong_question_ids, answers_json, submitted_at
     FROM quiz_attempts WHERE user_id = ? ORDER BY submitted_at DESC, id DESC
   `).bind(user.userId).all<QuizAttemptRow>();
   return result.results ?? [];
 }
 
+export async function getLatestQuizAttempt(userId: string, lessonId: string, quizType: QuizType): Promise<QuizAttemptRow | null> {
+  return getD1().prepare(`
+    SELECT id, lesson_id, quiz_type, score, max_score, wrong_question_ids, answers_json, submitted_at
+    FROM quiz_attempts WHERE user_id = ? AND lesson_id = ? AND quiz_type = ?
+    ORDER BY submitted_at DESC, id DESC LIMIT 1
+  `).bind(userId, lessonId, quizType).first<QuizAttemptRow>();
+}
+
 export async function getQuizAttemptsForLearner(userId: string): Promise<QuizAttemptRow[]> {
   const result = await getD1().prepare(`
-    SELECT id, lesson_id, quiz_type, score, max_score, wrong_question_ids, submitted_at
+    SELECT id, lesson_id, quiz_type, score, max_score, wrong_question_ids, answers_json, submitted_at
     FROM quiz_attempts WHERE user_id = ? ORDER BY submitted_at DESC, id DESC
   `).bind(userId).all<QuizAttemptRow>();
   return result.results ?? [];
@@ -115,6 +124,32 @@ export function latestQuizAttemptMap(rows: QuizAttemptRow[]) {
     if (!map.has(key)) map.set(key, row);
   }
   return map;
+}
+
+export function latestFullQuizAttemptMap(rows: QuizAttemptRow[]) {
+  const map = new Map<string, QuizAttemptRow>();
+  for (const row of rows) {
+    const expected = row.quiz_type === "pre" ? 3 : 5;
+    const key = `${row.lesson_id}:${row.quiz_type}`;
+    if (Number(row.max_score) === expected && !map.has(key)) map.set(key, row);
+  }
+  return map;
+}
+
+export type AdminQuizAttemptRow = QuizAttemptRow & {
+  user_id: string;
+  email: string;
+  display_name: string;
+};
+
+export async function getAdminQuizAttempts(): Promise<AdminQuizAttemptRow[]> {
+  const result = await getD1().prepare(`
+    SELECT qa.id, qa.user_id, l.email, l.display_name, qa.lesson_id, qa.quiz_type,
+      qa.score, qa.max_score, qa.wrong_question_ids, qa.answers_json, qa.submitted_at
+    FROM quiz_attempts qa JOIN learners l ON l.user_id = qa.user_id
+    ORDER BY qa.submitted_at DESC, qa.id DESC
+  `).all<AdminQuizAttemptRow>();
+  return result.results ?? [];
 }
 
 export function parseWrongQuestionIds(row?: QuizAttemptRow) {

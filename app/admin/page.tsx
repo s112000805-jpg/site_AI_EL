@@ -31,7 +31,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     <section className="dashboard-title"><div><p className="eyebrow">MANAGER DASHBOARD</p><h1>學習管理報告</h1><p>掌握學員完成進度、學習中的課程與總觀看時間。</p></div></section>
     <section className="metric-grid"><article><span>學員人數</span><b>{allLearners.length}<small> 人</small></b></article><article><span>完成課次</span><b>{completed}<small> 次</small></b></article><article><span>平均完成率</span><b>{avg}%</b></article><article><span>總學習時間</span><b>{formatDuration(watched)}</b></article></section>
     <section className="report-panel admin-panel">
-      <div className="panel-heading"><div><h2>學員明細</h2><span>共 {totalLessonCount} 堂影片課</span></div><a className="export-button" href={`/api/admin/export?${exportParams.toString()}`}>下載目前結果 CSV</a></div>
+      <div className="panel-heading"><div><h2>學員明細</h2><span>共 {totalLessonCount} 堂影片課</span></div><div className="export-actions"><a className="export-button secondary" href="/api/admin/export?type=wrong">下載錯題 CSV</a><a className="export-button" href={`/api/admin/export?${exportParams.toString()}`}>下載目前結果 CSV</a></div></div>
       <form className="report-filters" method="get">
         <label><span>搜尋學員</span><input name="q" defaultValue={query} placeholder="輸入姓名或 Email" /></label>
         <label><span>整體狀態</span><select name="status" defaultValue={status}><option value="all">全部狀態</option><option value="completed">全部完成</option><option value="in_progress">學習中</option><option value="not_started">尚未開始</option></select></label>
