@@ -46,6 +46,9 @@ const notebookLmQuizOverrides: Record<string, LessonQuiz> = {
 
 /** 依課程目標產生固定題組；答案只在伺服器端批改後回傳。 */
 export function buildLessonQuiz(lesson: Lesson): LessonQuiz {
+  if (lesson.quizStatus === "pending") {
+    throw new Error("這門課程的測驗正在準備中");
+  }
   const notebookLmQuiz = notebookLmQuizOverrides[lesson.id];
   if (notebookLmQuiz) return notebookLmQuiz;
   const tag = lesson.tags?.[0] ?? "AI 應用";
@@ -78,6 +81,7 @@ export function buildLessonQuiz(lesson: Lesson): LessonQuiz {
 export function getQuizQuestions(lessonId: string, quizType: QuizType) {
   const lesson = findLesson(lessonId);
   if (!lesson) throw new Error("找不到指定的課程影片");
+  if (lesson.quizStatus === "pending") throw new Error("這門課程的測驗正在準備中");
   return buildLessonQuiz(lesson)[quizType];
 }
 

@@ -51,7 +51,7 @@ export function CourseCatalog() {
           <tbody>{rows.length ? rows.map(({ stage, stageIndex, lesson }) => <tr key={lesson.code}>
             <td data-label="階段"><span className={`stage-badge tone-${stageIndex + 1}`}>{stage.className}<b>{stage.title}</b></span></td>
             <td data-label="課程編號"><code>{lesson.code}</code></td>
-            <td data-label="課程名稱"><b>{lesson.title}</b><small>{lesson.kind} · {contentTypeLabels[lesson.contentType]} · {lesson.durationLabel}</small>{lesson.tags?.length ? <div className="lesson-topic-tags">{lesson.tags.map((tag) => <span key={tag}>{tag}</span>)}</div> : null}</td>
+            <td data-label="課程名稱"><b>{lesson.title}</b><small>{lesson.kind} · {contentTypeLabels[lesson.contentType]} · {lesson.durationLabel}</small>{lesson.quizStatus === "pending" && <span className="catalog-quiz-pending">測驗準備中</span>}{lesson.tags?.length ? <div className="lesson-topic-tags">{lesson.tags.map((tag) => <span key={tag}>{tag}</span>)}</div> : null}</td>
             <td data-label="影片說明">{lesson.description}</td>
             <td data-label="影片連結"><div className="catalog-links"><a href={`#lesson-${lesson.id}`}><PlayCircle aria-hidden="true" />本站觀看</a><a href={`https://youtu.be/${lesson.id}`} target="_blank" rel="noreferrer"><ExternalLink aria-hidden="true" />YouTube</a></div></td>
           </tr>) : <tr><td colSpan={5} className="empty-row">找不到符合目前條件的課程，請調整搜尋文字或篩選標籤。</td></tr>}</tbody>

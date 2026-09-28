@@ -14,7 +14,7 @@ export default async function QuizzesPage() {
   const fullAttempts = latestFullQuizAttemptMap(attempts);
   const latestAttempts = latestQuizAttemptMap(attempts);
   const lessonChoices = courseStages.flatMap((stage) => stage.lessons.map((lesson) => {
-    const quiz = buildLessonQuiz(lesson);
+    const quiz = lesson.quizStatus === "pending" ? null : buildLessonQuiz(lesson);
     const attempt = fullAttempts.get(`${lesson.id}:post`);
     return {
       id: lesson.id,
@@ -22,8 +22,9 @@ export default async function QuizzesPage() {
       title: lesson.title,
       stageId: stage.id,
       stageLabel: `${stage.className}｜${stage.title}`,
-      sourceNote: quiz.sourceNote,
-      questions: toPublicQuestions(quiz.post),
+      quizStatus: lesson.quizStatus ?? "ready",
+      sourceNote: quiz?.sourceNote ?? lesson.quizPendingReason ?? "正在等待影片字幕，完成內容核對後就會開放作答。",
+      questions: quiz ? toPublicQuestions(quiz.post) : [],
       attempt: attempt ? { score: Number(attempt.score), maxScore: Number(attempt.max_score), wrongQuestionIds: parseWrongQuestionIds(latestAttempts.get(`${lesson.id}:post`)) } : null,
     };
   }));

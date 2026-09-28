@@ -202,6 +202,14 @@ html[data-theme="dark"] .quiz-questions fieldset.is-wrong{background:#3a2025}
 .quiz-bank-paper-heading h1{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px)}
 .quiz-bank-paper-heading>b{white-space:nowrap;padding:8px 12px;border-radius:999px;background:var(--mint);color:#08243f}
 .quiz-bank-empty{max-width:800px;margin:60px auto;text-align:center;color:var(--muted)}
+.quiz-pending-badge,.catalog-quiz-pending{display:inline-flex;width:max-content;margin-top:10px;padding:5px 10px;border-radius:999px;background:#fff0c7;color:#7a4b00;font-size:calc(12px + var(--font-delta));font-weight:900}
+.lesson-quiz-pending,.quiz-bank-pending{margin:0;padding:20px 22px;border-top:1px solid var(--line);background:color-mix(in srgb,#fff0c7 45%,var(--paper));color:var(--ink)}
+.lesson-quiz-pending b,.quiz-bank-pending b{color:#7a4b00;font-size:calc(18px + var(--font-delta))}
+.lesson-quiz-pending p,.quiz-bank-pending p{margin:5px 0 0;color:var(--muted)}
+.quiz-bank-pending{border:1px dashed #d5a84f;border-radius:14px}
+html[data-theme="dark"] .quiz-pending-badge,html[data-theme="dark"] .catalog-quiz-pending{background:#4a3514;color:#ffd37b}
+html[data-theme="dark"] .lesson-quiz-pending,html[data-theme="dark"] .quiz-bank-pending{background:#2f2719}
+html[data-theme="dark"] .lesson-quiz-pending b,html[data-theme="dark"] .quiz-bank-pending b{color:#ffd37b}
 html[data-theme="dark"] .quiz-bank-page{background:linear-gradient(180deg,#102538,var(--paper) 280px)}
 
 @media(max-width:760px){

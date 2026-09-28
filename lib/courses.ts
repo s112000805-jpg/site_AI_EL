@@ -8,6 +8,8 @@ export type Lesson = {
   startAt?: number;
   kind: string;
   contentType: "long" | "short";
+  quizStatus?: "ready" | "pending";
+  quizPendingReason?: string;
   tags?: string[];
 };
 
@@ -46,7 +48,6 @@ const foundationLessons = [
   createLesson({ id: "rsdk0wmoSBM", code: "AI-01-04", title: "提示詞的奇幻漂流：解密 LLM 文字生成", description: "理解大型語言模型如何根據提示預測與生成文字，建立正確的提示設計觀念。", durationSeconds: 796, kind: "教學影片", tags: ["提示工程", "AI 基礎"] }),
   createLesson({ id: "dfQLHBAIXlU", code: "AI-01-05", title: "AI 思考方式", description: "建立使用 AI 時的基本思考框架，為後續提問、追問與人機協作打好基礎。", durationSeconds: 513, kind: "教學影片", tags: ["AI 基礎"] }),
   createLesson({ id: "xOIpOneOx44", code: "AI-01-06", title: "第 1 課：ChatGPT 是什麼？", description: "認識 ChatGPT 的用途與基本操作，完成第一次生成式 AI 對話。", durationSeconds: 342, kind: "入門實作", tags: ["ChatGPT", "AI 基礎"] }),
-  createLesson({ id: "fvErigVhE9E", code: "AI-01-07", title: "如何使用 ChatGPT", description: "從輸入問題、補充背景到修正答案，掌握 ChatGPT 的基本使用流程。", durationSeconds: 241, kind: "入門實作", tags: ["ChatGPT", "提示工程"] }),
   createLesson({ id: "RpkLAulaMc0", code: "AI-01-08", title: "2 分鐘了解 ChatGPT", description: "快速掌握 ChatGPT 的運作概念、適用任務與使用時應注意的限制。", durationSeconds: 136, kind: "快速導讀", tags: ["ChatGPT", "AI 基礎"] }),
   createLesson({ id: "hvLbKydeHkw", code: "AI-01-09", title: "2026 AI 職缺市場：現實與金礦", description: "理解 AI 對職務與技能需求的影響，建立務實的學習方向與職涯判斷。", durationSeconds: 455, kind: "趨勢影片", tags: ["AI 職涯"] }),
   createLesson({ id: "V2X1Jzuxm0s", code: "AI-01-10", title: "解密 LLM 文字生成過程", description: "用簡短導讀理解大型語言模型如何切分文字、預測下一個詞元並逐步生成回答。", durationSeconds: 35, kind: "快速導讀", contentType: "long", tags: ["AI 基礎", "資料與模型"] }),
