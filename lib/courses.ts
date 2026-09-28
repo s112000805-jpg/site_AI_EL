@@ -55,8 +55,6 @@ const foundationLessons = [
 
 const applicationLessons = [
   createLesson({ id: "rWKhewf4iKw", code: "AI-02-01", title: "AI 作為你的思維夥伴", description: "透過提問、追問與觀點比較，讓 AI 協助釐清想法並改善決策。", durationSeconds: 430, kind: "教學影片", tags: ["提示工程", "職場應用"] }),
-  createLesson({ id: "LNMHoCnoudU", code: "AI-02-02", title: "DeepSeek 七大提問技巧", description: "練習七種實用提問方法，改善需求表達、答案結構與結果品質。", durationSeconds: 166, kind: "提示實作", tags: ["提示工程"] }),
-  createLesson({ id: "sOfvkU2wf-M", code: "AI-02-03", title: "DeepSeek R1 實用技巧", description: "認識推理模型的使用方式，學會為複雜問題補充條件並檢查推理結果。", durationSeconds: 198, kind: "工具實作", tags: ["提示工程"] }),
   createLesson({ id: "XpiwDd0pa5s", code: "AI-02-04", title: "ChatGPT 進階實戰：五大關鍵功能", description: "整合 ChatGPT 的進階能力，提升研究、整理、寫作與多模態任務效率。", durationSeconds: 943, kind: "進階實作", tags: ["ChatGPT", "職場應用"] }),
   createLesson({ id: "UhdPD5bTZ0E", code: "AI-02-05", title: "AI 電子郵件大師指南", description: "運用 AI 撰寫、改寫與檢查電子郵件，兼顧語氣、目的與收件者情境。", durationSeconds: 450, kind: "辦公實作", tags: ["職場應用"] }),
   createLesson({ id: "VmcqbM4S6g4", code: "AI-02-06", title: "AI 時代的簡報煉金術", description: "從內容架構到視覺表達，運用 AI 提升簡報規劃與製作效率。", durationSeconds: 385, kind: "辦公實作", tags: ["Canva／簡報", "職場應用"] }),
@@ -65,7 +63,6 @@ const applicationLessons = [
   createLesson({ id: "-Pi4tzmMQU0", code: "AI-02-09", title: "第 2 課：讓 AI 幫你輕鬆做影片", description: "認識 AI 影片製作的基礎步驟，從文字構想到可觀看的影像內容。", durationSeconds: 152, kind: "影音入門", tags: ["影片製作"] }),
   createLesson({ id: "5vuZqm8RBwo", code: "AI-02-10", title: "第 3 課：AI 幫助製作電影", description: "從故事、畫面到剪輯，理解 AI 如何參與簡易電影製作流程。", durationSeconds: 366, kind: "影音實作", tags: ["影片製作"] }),
   createLesson({ id: "S2V-Zvm7CK4", code: "AI-02-11", title: "蘇格拉底私人學習教練", description: "用追問與反思設計個人化 AI 學習教練，強化理解而非只取得答案。", durationSeconds: 725, kind: "學習實作", tags: ["提示工程", "職場應用"] }),
-  createLesson({ id: "kRmJXErE5Bk", code: "AI-02-12", title: "拆解『留言 666 免費送文件』內容策略", description: "分析社群內容的引導與轉換設計，建立對 AI 行銷話術的判讀能力。", durationSeconds: 252, kind: "案例分析", tags: ["內容行銷"] }),
   createLesson({ id: "bH5CXiHDfQw", code: "AI-02-13", title: "Canva AI 簡報生成完全解析", description: "完整理解 Canva AI 簡報生成流程，從內容規劃、版面產生到實際調整，提升簡報製作效率。", durationSeconds: 566, kind: "簡報實作", tags: ["Canva／簡報", "職場應用"] }),
 ];
 
@@ -73,7 +70,6 @@ const workflowLessons = [
   createLesson({ id: "USIpkEKYPTY", code: "AI-03-01", title: "掌握 AI 協作：從對話框到自動化看板", description: "將單次 AI 對話整理成可追蹤、可重複執行的自動化工作流程。", durationSeconds: 487, kind: "教學影片", tags: ["自動化"] }),
   createLesson({ id: "1xyrq7azpmQ", code: "AI-03-02", title: "ChatGPT 工作分頁：自動化你的工作流程", description: "利用工作分頁整理任務、資料與輸出，建立可持續操作的 AI 工作空間。", durationSeconds: 635, kind: "工作流實作", tags: ["ChatGPT", "自動化"] }),
   createLesson({ id: "wUI-IpQnLGE", code: "AI-03-03", title: "精通你的 AI 程式碼助理", description: "從權限控制、開發伺服器到格式化與自動化，將 AI 助理納入安全的開發工作流。", durationSeconds: 614, kind: "開發實作", tags: ["AI 開發", "自動化"] }),
-  createLesson({ id: "6AM5pvx3ngI", code: "AI-03-04", title: "Codex AI 保姆級教學", description: "從專案理解、修改程式到驗證成果，循序掌握 AI 編碼代理的工作方式。", durationSeconds: 514, kind: "開發實作", tags: ["AI 開發", "自動化"] }),
   createLesson({ id: "4-lAJTvPbs8", code: "AI-03-05", title: "Vibe Coding 全圖解教學", description: "理解需求描述、AI 產碼、測試與修正的完整循環，建立可控的 Vibe Coding 流程。", durationSeconds: 620, kind: "開發實作", tags: ["AI 開發"] }),
   createLesson({ id: "SUMg-5mh4ls", code: "AI-03-06", title: "解鎖技術堆疊：App 實際上如何運作", description: "理解前端、後端、資料庫與部署之間的關係，補足 AI 開發所需的系統觀。", durationSeconds: 546, kind: "技術基礎", tags: ["AI 開發"] }),
   createLesson({ id: "XQdck8qopXM", code: "AI-03-07", title: "從 0 到 1：AI 雙向同步待辦清單", description: "以短篇實作展示資料同步與任務狀態更新，建立自動化應用的基本概念。", durationSeconds: 51, kind: "快速實作", tags: ["AI 開發", "自動化"] }),
@@ -89,7 +85,6 @@ const workflowLessons = [
 ];
 
 const systemLessons = [
-  createLesson({ id: "BuASLtkWPdc", code: "AI-04-01", title: "新的疆界：理解 AI 代理", description: "認識 AI Agent 如何接收目標、使用工具並執行多步驟任務。", durationSeconds: 418, kind: "教學影片", tags: ["Agent／智能體", "自動化"] }),
   createLesson({ id: "xfljiHXrD6E", code: "AI-04-02", title: "OpenClaw 打造你的 AI 團隊", description: "理解多個 AI Agent 的角色、分工與協作，組織成可管理的 AI 團隊。", durationSeconds: 395, kind: "實作影片", tags: ["Agent／智能體", "自動化"] }),
   createLesson({ id: "n_4ZscuDQNc", code: "AI-04-03", title: "OpenClaw 2.0 五大更新全解析", description: "從記憶、技能、自動化、使用介面與安全更新，理解 Agent 系統的維護與治理。", durationSeconds: 359, kind: "延伸影片", tags: ["Agent／智能體", "自動化"] }),
   createLesson({ id: "VmNKDbd_vsI", code: "AI-04-04", title: "用 Claude Code 打造自動化 AI 公司", description: "以多代理分工、任務委派與程式自動化，設計可營運的一人 AI 公司系統。", durationSeconds: 443, kind: "系統實作", tags: ["Agent／智能體", "AI 開發", "自動化"] }),
