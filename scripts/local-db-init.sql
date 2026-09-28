@@ -40,3 +40,23 @@ ON `quiz_attempts` (`user_id`, `lesson_id`, `submitted_at`);
 
 CREATE INDEX IF NOT EXISTS `quiz_attempts_user_submitted_idx`
 ON `quiz_attempts` (`user_id`, `submitted_at`);
+
+CREATE TABLE IF NOT EXISTS `visitor_events` (
+  `id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+  `visitor_id` text NOT NULL,
+  `session_id` text NOT NULL,
+  `path` text NOT NULL,
+  `referrer_host` text,
+  `device_type` text NOT NULL,
+  `is_authenticated` integer DEFAULT 0 NOT NULL,
+  `visited_at` text DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS `visitor_events_visited_at_idx`
+ON `visitor_events` (`visited_at`);
+
+CREATE INDEX IF NOT EXISTS `visitor_events_visitor_id_idx`
+ON `visitor_events` (`visitor_id`);
+
+CREATE INDEX IF NOT EXISTS `visitor_events_path_idx`
+ON `visitor_events` (`path`);

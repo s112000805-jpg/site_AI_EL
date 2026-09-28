@@ -44,3 +44,22 @@ export const quizAttempts = sqliteTable(
     index("quiz_attempts_user_submitted_idx").on(table.userId, table.submittedAt),
   ],
 );
+
+export const visitorEvents = sqliteTable(
+  "visitor_events",
+  {
+    id: integer("id").primaryKey({ autoIncrement: true }),
+    visitorId: text("visitor_id").notNull(),
+    sessionId: text("session_id").notNull(),
+    path: text("path").notNull(),
+    referrerHost: text("referrer_host"),
+    deviceType: text("device_type").notNull(),
+    isAuthenticated: integer("is_authenticated").notNull().default(0),
+    visitedAt: text("visited_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+  },
+  (table) => [
+    index("visitor_events_visited_at_idx").on(table.visitedAt),
+    index("visitor_events_visitor_id_idx").on(table.visitorId),
+    index("visitor_events_path_idx").on(table.path),
+  ],
+);

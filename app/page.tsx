@@ -93,6 +93,6 @@ export default async function Home() {
       </div></section>
       <section className="cta-section"><div><p className="eyebrow">YOUR NEXT STEP</p><h2>從第一部影片開始，建立自己的 AI 能力地圖。</h2></div><a className="primary-action light" href={user ? "/progress" : chatGPTSignInPath("/progress")} target="_top">{user ? "查看我的成果" : "登入並開始記錄"}</a></section>
     </main>
-    <footer className="site-footer"><div className="footer-brand"><b>FLOW AI 學院</b><span>AI 樂高學堂｜讓每一步學習，都累積成可見的能力。</span></div><div className="footer-contact"><a href="https://www.youtube.com/@AI%E6%A8%82%E9%AB%98%E5%AD%B8%E5%A0%82-p5j" target="_blank" rel="noreferrer"><Video aria-hidden="true" /><span><b>YouTube 頻道</b><small>AI 樂高學堂</small></span></a><div><MessageCircle aria-hidden="true" /><span><b>LINE／課程聯絡</b><small>請由 YouTube 頻道簡介取得最新聯絡方式</small></span></div></div></footer>
+    <footer className="site-footer"><div className="footer-brand"><b>FLOW AI 學院</b><span>AI 樂高學堂｜讓每一步學習，都累積成可見的能力。</span><small>本站使用匿名訪客統計改善課程體驗，不保存完整 IP、姓名、Email 或查詢內容。</small></div><div className="footer-contact"><a href="https://www.youtube.com/@AI%E6%A8%82%E9%AB%98%E5%AD%B8%E5%A0%82-p5j" target="_blank" rel="noreferrer"><Video aria-hidden="true" /><span><b>YouTube 頻道</b><small>AI 樂高學堂</small></span></a><div><MessageCircle aria-hidden="true" /><span><b>LINE／課程聯絡</b><small>請由 YouTube 頻道簡介取得最新聯絡方式</small></span></div></div></footer>
   </>;
 }

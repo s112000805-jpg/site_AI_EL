@@ -1,5 +1,6 @@
 import { MobileNavigation } from "@/app/components/mobile-navigation";
 import { PwaRegistration } from "@/app/components/pwa-registration";
+import { VisitorTracker } from "@/app/components/visitor-tracker";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
@@ -35,6 +36,7 @@ export default function RootLayout({
     <html lang="zh-Hant" suppressHydrationWarning>
       <head><script dangerouslySetInnerHTML={{ __html: `(function(){try{var r=document.documentElement;var t=localStorage.getItem('flow-ai-theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';r.dataset.theme=t;var f=localStorage.getItem('flow-ai-font-size');r.dataset.fontSize=f==='small'||f==='large'?f:'medium'}catch(e){}})()` }} /></head>
       <body className="antialiased">
+        <VisitorTracker />
         {children}
         <MobileNavigation />
         <PwaRegistration />
