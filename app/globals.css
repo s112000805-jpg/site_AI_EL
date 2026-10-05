@@ -227,3 +227,5 @@ html[data-theme="dark"] .quiz-bank-page{background:linear-gradient(180deg,#10253
   .quiz-bank-paper-heading{display:grid}
   .quiz-bank-paper-heading>b{justify-self:start}
 }
+.video-frame iframe{display:block;border:0}
+.video-frame-short{width:min(100%,320px);margin-inline:auto;aspect-ratio:9/16}

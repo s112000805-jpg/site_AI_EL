@@ -46,6 +46,10 @@ const notebookLmQuizOverrides: Record<string, LessonQuiz> = {
 
 /** 依課程目標產生固定題組；答案只在伺服器端批改後回傳。 */
 export function buildLessonQuiz(lesson: Lesson): LessonQuiz {
+  // Shorts 用於課程導讀，不產生可計分的正式測驗。
+  if (lesson.contentType === "short") {
+    throw new Error("Shorts 短影音不提供正式測驗");
+  }
   if (lesson.quizStatus === "pending") {
     throw new Error("這門課程的測驗正在準備中");
   }

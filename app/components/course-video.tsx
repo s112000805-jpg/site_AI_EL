@@ -18,13 +18,15 @@ function loadYouTubeApi() {
   return apiPromise;
 }
 
-export function CourseVideo({ lessonId, title, startAt = 0, signedIn }: { lessonId: string; title: string; startAt?: number; signedIn: boolean }) {
+export function CourseVideo({ lessonId, title, startAt = 0, signedIn, contentType = "long" }: { lessonId: string; title: string; startAt?: number; signedIn: boolean; contentType?: "long" | "short" }) {
   const elementId = `yt-${useId().replace(/:/g, "")}`;
   const playerRef = useRef<Player | null>(null);
   const secondsRef = useRef(0);
   const playingRef = useRef(false);
   const lastTickRef = useRef(0);
   const [state, setState] = useState(signedIn ? "觀看進度會自動儲存" : "登入後自動記錄學習進度");
+  const playerParams = new URLSearchParams({ enablejsapi: "1", rel: "0", playsinline: "1" });
+  if (startAt > 0) playerParams.set("start", String(startAt));
 
   useEffect(() => {
     let alive = true;
@@ -43,7 +45,8 @@ export function CourseVideo({ lessonId, title, startAt = 0, signedIn }: { lesson
     }, 1000);
     void loadYouTubeApi().then(() => {
       if (!alive || !window.YT) return;
-      playerRef.current = new window.YT.Player(elementId, { videoId: lessonId, playerVars: { rel: 0, modestbranding: 1, start: startAt, playsinline: 1 }, events: { onStateChange: (event: { data: number }) => {
+      // 綁定已存在的隱私加強 iframe，保留 YouTube 播放進度事件。
+      playerRef.current = new window.YT.Player(elementId, { events: { onStateChange: (event: { data: number }) => {
         if (!window.YT) return;
         if (event.data === window.YT.PlayerState.PLAYING) { playingRef.current = true; lastTickRef.current = Date.now(); setState(signedIn ? "正在記錄實際觀看時間" : "登入後自動記錄學習進度"); }
         else { playingRef.current = false; if (event.data === window.YT.PlayerState.PAUSED || event.data === window.YT.PlayerState.ENDED) void flush(); }
@@ -52,5 +55,5 @@ export function CourseVideo({ lessonId, title, startAt = 0, signedIn }: { lesson
     return () => { alive = false; window.clearInterval(timer); void flush(); playerRef.current?.destroy(); };
   }, [elementId, lessonId, signedIn, startAt]);
 
-  return <div className="video-wrap"><div className="video-frame"><div id={elementId} title={title} /></div><p className="video-state"><span aria-hidden="true">●</span>{state}</p></div>;
+  return <div className="video-wrap"><div className={`video-frame${contentType === "short" ? " video-frame-short" : ""}`}><iframe id={elementId} src={`https://www.youtube-nocookie.com/embed/${lessonId}?${playerParams}`} title={title} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen referrerPolicy="strict-origin-when-cross-origin" /></div><p className="video-state"><span aria-hidden="true">●</span>{state}</p></div>;
 }
