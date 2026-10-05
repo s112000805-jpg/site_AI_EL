@@ -24,6 +24,13 @@ export async function ensureLearner(user: ChatGPTUser) {
   `).bind(user.userId, user.email, user.displayName).run();
 }
 
+/** 已建立學習紀錄的帳號數；未登入訪客不會計入。 */
+export async function getPublicLearnerCount(): Promise<number> {
+  const row = await getD1().prepare("SELECT COUNT(*) AS learner_count FROM learners")
+    .first<{ learner_count: number }>();
+  return Number(row?.learner_count ?? 0);
+}
+
 export async function getUserProgress(user: ChatGPTUser): Promise<ProgressRow[]> {
   await ensureLearner(user);
   const result = await getD1().prepare(`

@@ -86,6 +86,14 @@ export async function recordVisit(input: {
   ).run();
 }
 
+/** 對外只提供彙總數字，不回傳任何訪客識別碼或造訪紀錄。 */
+export async function getPublicVisitorCount(): Promise<number> {
+  await ensureVisitorTable();
+  const row = await getD1().prepare("SELECT COUNT(DISTINCT visitor_id) AS visitor_count FROM visitor_events")
+    .first<{ visitor_count: number }>();
+  return Number(row?.visitor_count ?? 0);
+}
+
 export async function getVisitorDashboard(): Promise<{
   summary: VisitorSummary;
   recentVisits: RecentVisit[];
