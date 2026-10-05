@@ -63,3 +63,23 @@ export const visitorEvents = sqliteTable(
     index("visitor_events_path_idx").on(table.path),
   ],
 );
+
+export const guestMessages = sqliteTable(
+  "guest_messages",
+  {
+    id: integer("id").primaryKey({ autoIncrement: true }),
+    guestKey: text("guest_key").notNull(),
+    nickname: text("nickname").notNull(),
+    body: text("body").notNull(),
+    lessonId: text("lesson_id"),
+    status: text("status").notNull().default("pending"),
+    adminReply: text("admin_reply"),
+    createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+    reviewedAt: text("reviewed_at"),
+    reviewedBy: text("reviewed_by"),
+  },
+  (table) => [
+    index("guest_messages_status_created_idx").on(table.status, table.createdAt),
+    index("guest_messages_guest_created_idx").on(table.guestKey, table.createdAt),
+  ],
+);
