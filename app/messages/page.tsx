@@ -14,7 +14,13 @@ export default async function MessagesPage({ searchParams }: { searchParams: Pro
   try { messageData = await getPublicMessages(page); } catch (error) { console.error("Public guestbook unavailable", error); }
 
   return <>
-    <header className="topbar"><Link className="brand" href="/"><span>F</span><b>FLOW AI 學院</b></Link><nav aria-label="主要導覽"><Link href="/">返回課程</Link><FontSizeControl /><ThemeToggle /></nav></header>
+    <header className="topbar">
+      {/* Vinext 的 Link 在此頁會攔截點擊並拋錯；首頁導覽改為完整載入。 */}
+      {/* eslint-disable @next/next/no-html-link-for-pages */}
+      <a className="brand" href="/"><span>F</span><b>FLOW AI 學院</b></a>
+      <nav aria-label="主要導覽"><a href="/">返回課程</a><FontSizeControl /><ThemeToggle /></nav>
+      {/* eslint-enable @next/next/no-html-link-for-pages */}
+    </header>
     <main className="guestbook-page">
       <div className="content-shell">
         <div className="guestbook-heading"><p className="eyebrow">LEARNING COMMUNITY</p><h1>訪客留言</h1><p>分享學習心得、提出課程問題，或告訴我們下一步想學什麼。</p></div>
