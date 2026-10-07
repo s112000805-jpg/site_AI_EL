@@ -1,4 +1,4 @@
-import { BarChart3, BookOpen, ClipboardCheck, Home, MessageCircle } from "lucide-react";
+import { BarChart3, BookOpen, ClipboardCheck, Home } from "lucide-react";
 /* eslint-disable @next/next/no-html-link-for-pages */
 
 /** Vinext 的 Link 在正式站會攔截點擊並報錯；手機導覽改用完整載入。 */
@@ -11,19 +11,15 @@ export function MobileNavigation() {
       </a>
       <a href="/#course-map">
         <BookOpen aria-hidden="true" />
-        <span>課程</span>
+        <span>找課程</span>
       </a>
       <a href="/quizzes">
         <ClipboardCheck aria-hidden="true" />
-        <span>題庫</span>
+        <span>測驗</span>
       </a>
       <a href="/progress">
         <BarChart3 aria-hidden="true" />
-        <span>成果</span>
-      </a>
-      <a href="/messages">
-        <MessageCircle aria-hidden="true" />
-        <span>留言</span>
+        <span>我的學習</span>
       </a>
     </nav>
   );
