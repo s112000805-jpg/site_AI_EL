@@ -101,7 +101,7 @@ export default async function Home() {
         <div className="instructor-copy">
           <p className="eyebrow">MEET YOUR INSTRUCTOR</p>
           <h2 id="instructor-title">認識講師</h2>
-          <p className="instructor-name"><b>陳全富</b><span>AI 樂高學堂教學主理人</span></p>
+          <p className="instructor-name"><b>陳銓富</b><span>AI 樂高學堂教學主理人</span></p>
           <p>專注把生成式 AI、ChatGPT、工作流與 AI Agent，整理成成人也能循序上手的任務式課程。每堂課不只解釋工具，更帶你完成可在工作與生活中重複使用的成果。</p>
           <div className="instructor-actions"><a className="primary-action" href="https://www.youtube.com/@AI%E6%A8%82%E9%AB%98%E5%AD%B8%E5%A0%82-p5j" target="_blank" rel="noreferrer">前往 YouTube 頻道</a><a className="secondary-action" href="/messages">留下課程問題</a></div>
         </div>
