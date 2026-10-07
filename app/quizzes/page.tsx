@@ -1,4 +1,4 @@
-import Link from "next/link";
+/* eslint-disable @next/next/no-html-link-for-pages */
 import { ArrowLeft, ClipboardCheck } from "lucide-react";
 import { QuizBank } from "@/app/components/quiz-bank";
 import { chatGPTSignInPath, getChatGPTUser } from "@/app/chatgpt-auth";
@@ -7,6 +7,8 @@ import { courseStages } from "@/lib/courses";
 import { buildLessonQuiz, toPublicQuestions } from "@/lib/quizzes";
 
 export const dynamic = "force-dynamic";
+
+/* Vinext 的 Link 在正式站會觸發 RSC prefetch 錯誤；跨頁導覽使用完整載入。 */
 
 export default async function QuizzesPage() {
   const user = await getChatGPTUser();
@@ -30,7 +32,7 @@ export default async function QuizzesPage() {
   }));
 
   return <main className="quiz-bank-page">
-    <header className="quiz-bank-header"><Link href="/"><ArrowLeft aria-hidden="true" />返回課程首頁</Link><div><span className="quiz-bank-mark"><ClipboardCheck aria-hidden="true" /></span><div><p className="eyebrow">QUIZ LIBRARY</p><h1>課程測驗題庫</h1><p>選擇階段與課程，完成單選題並保存成績與錯題。</p></div></div><Link className="secondary-action" href="/progress">查看學習成果</Link></header>
+    <header className="quiz-bank-header"><a href="/"><ArrowLeft aria-hidden="true" />返回課程首頁</a><div><span className="quiz-bank-mark"><ClipboardCheck aria-hidden="true" /></span><div><p className="eyebrow">QUIZ LIBRARY</p><h1>課程測驗題庫</h1><p>選擇階段與課程，完成單選題並保存成績與錯題。</p></div></div><a className="secondary-action" href="/progress">查看學習成果</a></header>
     <QuizBank lessons={lessonChoices} signedIn={Boolean(user)} signInHref={chatGPTSignInPath("/quizzes")} />
   </main>;
 }
