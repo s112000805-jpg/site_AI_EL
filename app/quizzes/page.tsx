@@ -13,7 +13,7 @@ export default async function QuizzesPage() {
   const attempts = user ? await getUserQuizAttempts(user) : [];
   const fullAttempts = latestFullQuizAttemptMap(attempts);
   const latestAttempts = latestQuizAttemptMap(attempts);
-  const lessonChoices = courseStages.flatMap((stage) => stage.lessons.map((lesson) => {
+  const lessonChoices = courseStages.flatMap((stage) => stage.lessons.filter((lesson) => lesson.contentType === "long").map((lesson) => {
     const quiz = lesson.quizStatus === "pending" ? null : buildLessonQuiz(lesson);
     const attempt = fullAttempts.get(`${lesson.id}:post`);
     return {

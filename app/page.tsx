@@ -9,6 +9,7 @@ import Image from "next/image";
 import { CourseCatalog } from "@/app/components/course-catalog";
 import { ThemeToggle } from "@/app/components/theme-toggle";
 import { FontSizeControl } from "@/app/components/font-size-control";
+import { SiteStats } from "@/app/components/site-stats";
 import {
   BrainCircuit,
   BriefcaseBusiness,
@@ -37,7 +38,7 @@ export default async function Home() {
     <header className="topbar">
       <a className="brand" href="#top"><span>F</span><b>FLOW AI 學院</b></a>
       <nav aria-label="主要導覽">
-        <a href="#course-map">課程地圖</a><a href="#method">學習方法</a><a href="/quizzes">測驗題庫</a><a href="/progress">學習成果</a>
+        <a href="#course-map">課程地圖</a><a href="#method">學習方法</a><a href="/quizzes">測驗題庫</a><a href="/progress">學習成果</a><a href="/messages">訪客留言</a>
         {isAdminUser(user) && <a href="/admin">管理後台</a>}
         <FontSizeControl />
         <ThemeToggle />
@@ -49,6 +50,7 @@ export default async function Home() {
         <div className="hero-copy"><p className="eyebrow">成人 AI 基礎學習路徑</p><h1>從會問，到能管理<br /><em>AI 工作系統</em></h1><p className="hero-lead">四階段循序學習，從生成式 AI 概念、日常應用、工作流，到 Agent 與治理。每一階段都用真實任務驗證成果。</p>
           <div className="hero-actions"><a className="primary-action" href="#course-map">查看課程地圖</a><a className="secondary-action" href="/quizzes">進入測驗題庫</a><a className="secondary-action" href="/progress">查看學習成果</a></div>
           <div className="hero-facts"><span><b>4</b> 個階段</span><span><b>{lessons.length}</b> 部影片</span><span><b>{totalMinutes}</b> 分鐘影片</span></div>
+          <SiteStats />
         </div>
         <div className="hero-visual"><Image src="/ai-course-hero.png" width={1024} height={1024} sizes="(max-width: 850px) 100vw, 50vw" priority alt="成人使用筆記型電腦學習 AI 的課程情境" /><div className="hero-note"><b>你的學習紀錄</b><span>登入後自動累積實際觀看時間</span></div></div>
       </div></section>
@@ -80,19 +82,19 @@ export default async function Home() {
           <summary><span className="stage-number">{stage.number}</span><span><small>{stage.className}</small><b>{stage.title}</b><em>{stage.subtitle}</em></span><strong>{stage.hours}</strong></summary>
           <div className="stage-body"><div className="stage-intro"><p>{stage.objective}</p><div className="topic-grid">{stage.topics.map((topic) => <article key={topic.title}><b>{topic.title}</b><span>{topic.detail}</span></article>)}</div><p className="project"><b>階段成果</b>{stage.project}</p></div>
             <div className="lesson-list">{stage.lessons.length ? stage.lessons.map((lesson) => {
-              const quiz = lesson.quizStatus === "pending" ? null : buildLessonQuiz(lesson);
+              const quiz = lesson.contentType === "short" || lesson.quizStatus === "pending" ? null : buildLessonQuiz(lesson);
               const attemptSummary = (type: "pre" | "post") => {
                 const fullAttempt = latestFullAttempts.get(`${lesson.id}:${type}`);
                 const latestAttempt = latestAttempts.get(`${lesson.id}:${type}`);
                 return fullAttempt ? { score: Number(fullAttempt.score), maxScore: Number(fullAttempt.max_score), wrongQuestionIds: parseWrongQuestionIds(latestAttempt) } : null;
               };
-              return <article className="lesson-card" id={`lesson-${lesson.id}`} key={lesson.id}><div className="lesson-heading"><span>{lesson.code} · {lesson.kind} · {lesson.durationLabel}</span><h3>{lesson.title}</h3><p>{lesson.description}</p>{lesson.quizStatus === "pending" && <b className="quiz-pending-badge">測驗準備中</b>}</div><CourseVideo lessonId={lesson.id} title={lesson.title} startAt={lesson.startAt} signedIn={Boolean(user)} />{quiz ? <LessonQuiz lessonId={lesson.id} lessonCode={lesson.code} questions={{ pre: toPublicQuestions(quiz.pre), post: toPublicQuestions(quiz.post) }} sourceNote={quiz.sourceNote} signedIn={Boolean(user)} signInHref={chatGPTSignInPath(`/#lesson-${lesson.id}`)} initialAttempts={{ pre: attemptSummary("pre"), post: attemptSummary("post") }} /> : <section className="lesson-quiz-pending" aria-label="測驗準備中"><b>測驗準備中</b><p>{lesson.quizPendingReason ?? "正在等待影片字幕，完成內容核對後就會開放作答。"}</p></section>}</article>;
+              return <article className="lesson-card" id={`lesson-${lesson.id}`} key={lesson.id}><div className="lesson-heading"><span>{lesson.code} · {lesson.kind} · {lesson.durationLabel}</span><h3>{lesson.title}</h3><p>{lesson.description}</p>{lesson.quizStatus === "pending" && <b className="quiz-pending-badge">測驗準備中</b>}</div><CourseVideo lessonId={lesson.id} title={lesson.title} startAt={lesson.startAt} signedIn={Boolean(user)} contentType={lesson.contentType} />{lesson.contentType === "short" ? null : quiz ? <LessonQuiz lessonId={lesson.id} lessonCode={lesson.code} questions={{ pre: toPublicQuestions(quiz.pre), post: toPublicQuestions(quiz.post) }} sourceNote={quiz.sourceNote} signedIn={Boolean(user)} signInHref={chatGPTSignInPath(`/#lesson-${lesson.id}`)} initialAttempts={{ pre: attemptSummary("pre"), post: attemptSummary("post") }} /> : <section className="lesson-quiz-pending" aria-label="測驗準備中"><b>測驗準備中</b><p>{lesson.quizPendingReason ?? "正在等待影片字幕，完成內容核對後就會開放作答。"}</p></section>}</article>;
             }) : <div className="coming-soon"><b>實作課程準備中</b><p>本階段將加入提示設計、辦公應用與多模態練習。</p></div>}</div>
           </div>
         </details>)}</div>
       </div></section>
       <section className="cta-section"><div><p className="eyebrow">YOUR NEXT STEP</p><h2>從第一部影片開始，建立自己的 AI 能力地圖。</h2></div><a className="primary-action light" href={user ? "/progress" : chatGPTSignInPath("/progress")} target="_top">{user ? "查看我的成果" : "登入並開始記錄"}</a></section>
     </main>
-    <footer className="site-footer"><div className="footer-brand"><b>FLOW AI 學院</b><span>AI 樂高學堂｜讓每一步學習，都累積成可見的能力。</span><small>本站使用匿名訪客統計改善課程體驗，不保存完整 IP、姓名、Email 或查詢內容；紀錄最多保留 90 天。</small></div><div className="footer-contact"><a href="https://www.youtube.com/@AI%E6%A8%82%E9%AB%98%E5%AD%B8%E5%A0%82-p5j" target="_blank" rel="noreferrer"><Video aria-hidden="true" /><span><b>YouTube 頻道</b><small>AI 樂高學堂</small></span></a><div><MessageCircle aria-hidden="true" /><span><b>LINE 官方帳號</b><small>@AI樂高學堂</small></span></div></div></footer>
+    <footer className="site-footer"><div className="footer-brand"><b>FLOW AI 學院</b><span>AI 樂高學堂｜讓每一步學習，都累積成可見的能力。</span><small>本站使用匿名訪客統計改善課程體驗，紀錄最多保留 90 天；訪客主動留言時，暱稱及留言內容會在審核通過後公開。請勿填寫個資。</small></div><div className="footer-contact"><a href="/messages"><MessageCircle aria-hidden="true" /><span><b>訪客留言</b><small>分享心得與課程問題</small></span></a><a href="https://www.youtube.com/@AI%E6%A8%82%E9%AB%98%E5%AD%B8%E5%A0%82-p5j" target="_blank" rel="noreferrer"><Video aria-hidden="true" /><span><b>YouTube 頻道</b><small>AI 樂高學堂</small></span></a><div><MessageCircle aria-hidden="true" /><span><b>LINE 官方帳號</b><small>@AI樂高學堂</small></span></div></div></footer>
   </>;
 }

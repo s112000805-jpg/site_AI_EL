@@ -27,6 +27,10 @@ export function CourseCatalog() {
     return [stage.className, stage.title, lesson.code, lesson.title, lesson.description, lesson.kind, contentTypeLabels[lesson.contentType], ...(lesson.tags ?? [])]
       .some((value) => value.toLocaleLowerCase("zh-Hant").includes(normalized));
   }), [activeContentType, activeTag, normalized]);
+  const stageRowCounts = new Map<string, number>();
+  for (const { stage } of rows) {
+    stageRowCounts.set(stage.id, (stageRowCounts.get(stage.id) ?? 0) + 1);
+  }
 
   return (
     <section id="course-map" className="catalog-section" aria-labelledby="catalog-title">
@@ -48,12 +52,12 @@ export function CourseCatalog() {
       <div className="catalog-table-wrap">
         <table className="catalog-table">
           <thead><tr><th>階段</th><th>課程編號</th><th>課程名稱</th><th>影片說明</th><th>影片連結</th></tr></thead>
-          <tbody>{rows.length ? rows.map(({ stage, stageIndex, lesson }) => <tr key={lesson.code}>
-            <td data-label="階段"><span className={`stage-badge tone-${stageIndex + 1}`}>{stage.className}<b>{stage.title}</b></span></td>
+          <tbody>{rows.length ? rows.map(({ stage, stageIndex, lesson }, index) => <tr key={lesson.code} aria-label={`${stage.className}｜${stage.title}・${lesson.title}`}>
+            {(index === 0 || rows[index - 1].stage.id !== stage.id) && <td data-label="階段" rowSpan={stageRowCounts.get(stage.id)} className="catalog-stage-cell"><span className={`stage-badge tone-${stageIndex + 1}`}>{stage.className}<b>{stage.title}</b></span></td>}
             <td data-label="課程編號"><code>{lesson.code}</code></td>
-            <td data-label="課程名稱"><b>{lesson.title}</b><small>{lesson.kind} · {contentTypeLabels[lesson.contentType]} · {lesson.durationLabel}</small>{lesson.quizStatus === "pending" && <span className="catalog-quiz-pending">測驗準備中</span>}{lesson.tags?.length ? <div className="lesson-topic-tags">{lesson.tags.map((tag) => <span key={tag}>{tag}</span>)}</div> : null}</td>
-            <td data-label="影片說明">{lesson.description}</td>
-            <td data-label="影片連結"><div className="catalog-links"><a href={`#lesson-${lesson.id}`}><PlayCircle aria-hidden="true" />本站觀看</a><a href={`https://youtu.be/${lesson.id}`} target="_blank" rel="noreferrer"><ExternalLink aria-hidden="true" />YouTube</a></div></td>
+            <td data-label="課程名稱" className="catalog-lesson-cell"><b>{lesson.title}</b><small>{lesson.kind} · {contentTypeLabels[lesson.contentType]} · {lesson.durationLabel}</small>{lesson.quizStatus === "pending" && <span className="catalog-quiz-pending">測驗準備中</span>}{lesson.tags?.length ? <div className="lesson-topic-tags">{lesson.tags.map((tag) => <span key={tag}>{tag}</span>)}</div> : null}</td>
+            <td data-label="影片說明" className="catalog-description-cell">{lesson.description}</td>
+            <td data-label="影片連結" className="catalog-links-cell"><div className="catalog-links"><a href={`#lesson-${lesson.id}`}><PlayCircle aria-hidden="true" />本站觀看</a><a href={`https://youtu.be/${lesson.id}`} target="_blank" rel="noreferrer"><ExternalLink aria-hidden="true" />YouTube</a></div></td>
           </tr>) : <tr><td colSpan={5} className="empty-row">找不到符合目前條件的課程，請調整搜尋文字或篩選標籤。</td></tr>}</tbody>
         </table>
       </div>

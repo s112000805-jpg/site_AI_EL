@@ -41,6 +41,8 @@ function createLesson(seed: LessonSeed): Lesson {
   };
 }
 
+const pendingTranscriptQuizReason = "正在依影片逐字稿核對題目，完成後開放作答。";
+
 const foundationLessons = [
   createLesson({ id: "THzgMMpIREM", code: "AI-01-01", title: "什麼是生成式 AI", description: "從人工智慧、資料與模型開始，建立生成式 AI 的基礎概念。", durationSeconds: 887, startAt: 176, kind: "教學影片", tags: ["AI 基礎"] }),
   createLesson({ id: "MAY4An8D7yE", code: "AI-01-02", title: "揭開 AI 的神秘面紗", description: "用生活化案例理解 AI 的能力、限制與常見應用，建立完整的入門地圖。", durationSeconds: 796, kind: "觀念影片", tags: ["AI 基礎"] }),
@@ -51,6 +53,10 @@ const foundationLessons = [
   createLesson({ id: "RpkLAulaMc0", code: "AI-01-08", title: "2 分鐘了解 ChatGPT", description: "快速掌握 ChatGPT 的運作概念、適用任務與使用時應注意的限制。", durationSeconds: 136, kind: "快速導讀", tags: ["ChatGPT", "AI 基礎"] }),
   createLesson({ id: "hvLbKydeHkw", code: "AI-01-09", title: "2026 AI 職缺市場：現實與金礦", description: "理解 AI 對職務與技能需求的影響，建立務實的學習方向與職涯判斷。", durationSeconds: 455, kind: "趨勢影片", tags: ["AI 職涯"] }),
   createLesson({ id: "V2X1Jzuxm0s", code: "AI-01-10", title: "解密 LLM 文字生成過程", description: "用簡短導讀理解大型語言模型如何切分文字、預測下一個詞元並逐步生成回答。", durationSeconds: 35, kind: "快速導讀", contentType: "long", tags: ["AI 基礎", "資料與模型"] }),
+  createLesson({ id: "Sep2hMbblP4", code: "AI-01-11", title: "AI 懶人包：電腦小白的 5 大超能力", description: "從入門角度認識 AI 能協助的日常任務；具體操作以影片示範為準。", durationSeconds: 386, kind: "入門導讀", quizStatus: "pending", quizPendingReason: pendingTranscriptQuizReason, tags: ["AI 基礎"] }),
+  createLesson({ id: "PtEvACco9AM", code: "AI-01-12", title: "掌握 AI 趨勢必追的 3 大指標帳號", description: "以短影音導讀追蹤 AI 趨勢的資訊來源，並提醒核對資訊時效。", durationSeconds: 71, kind: "趨勢短影音", contentType: "short", tags: ["AI 基礎"] }),
+  createLesson({ id: "y5w7S2pLRHU", code: "AI-01-13", title: "人工智慧簡潔解釋", description: "用簡短說明建立人工智慧的入門認識；細節與例子以影片內容為準。", durationSeconds: 457, kind: "觀念影片", quizStatus: "pending", quizPendingReason: pendingTranscriptQuizReason, tags: ["AI 基礎"] }),
+  createLesson({ id: "BvwmZ3G2Ubo", code: "AI-01-14", title: "如何駕馭你的 AI 外骨骼", description: "以短影音認識人與 AI 協作的概念，作為後續應用課程的導讀。", durationSeconds: 60, kind: "協作短影音", contentType: "short", tags: ["AI 基礎"] }),
 ];
 
 const applicationLessons = [
@@ -64,6 +70,11 @@ const applicationLessons = [
   createLesson({ id: "5vuZqm8RBwo", code: "AI-02-10", title: "第 3 課：AI 幫助製作電影", description: "從故事、畫面到剪輯，理解 AI 如何參與簡易電影製作流程。", durationSeconds: 366, kind: "影音實作", tags: ["影片製作"] }),
   createLesson({ id: "S2V-Zvm7CK4", code: "AI-02-11", title: "蘇格拉底私人學習教練", description: "用追問與反思設計個人化 AI 學習教練，強化理解而非只取得答案。", durationSeconds: 725, kind: "學習實作", tags: ["提示工程", "職場應用"] }),
   createLesson({ id: "bH5CXiHDfQw", code: "AI-02-13", title: "Canva AI 簡報生成完全解析", description: "完整理解 Canva AI 簡報生成流程，從內容規劃、版面產生到實際調整，提升簡報製作效率。", durationSeconds: 566, kind: "簡報實作", tags: ["Canva／簡報", "職場應用"] }),
+  createLesson({ id: "ErpmW9YgBJU", code: "AI-02-14", title: "盤點開源社群爆紅的 AI 影音生成神器", description: "導覽開源 AI 影音生成工具，選用前仍需檢查授權、成本與輸出品質。", durationSeconds: 67, kind: "影音工具導讀", quizStatus: "pending", quizPendingReason: pendingTranscriptQuizReason, tags: ["影片製作"] }),
+  createLesson({ id: "SLecO7O-zkQ", code: "AI-02-15", title: "2026 年 AI 選購指南：逐項任務拆解", description: "依工作任務比較 AI 工具選擇方向；產品資訊與價格需另行確認。", durationSeconds: 475, kind: "工具選擇", quizStatus: "pending", quizPendingReason: pendingTranscriptQuizReason, tags: ["職場應用"] }),
+  createLesson({ id: "EaDt6MGo1bw", code: "AI-02-16", title: "拒絕 AI 諂媚：AI 智囊團提示詞框架", description: "運用澄清問題與多角度審查提示，降低 AI 一味附和的風險。", durationSeconds: 465, kind: "提示實作", quizStatus: "pending", quizPendingReason: pendingTranscriptQuizReason, tags: ["提示工程", "職場應用"] }),
+  createLesson({ id: "4JSQkZSU5kQ", code: "AI-02-17", title: "GPT Image 2", description: "觀看 GPT Image 2 的影像應用介紹；功能與版本資訊以影片及官方資料為準。", durationSeconds: 381, kind: "影像應用", quizStatus: "pending", quizPendingReason: pendingTranscriptQuizReason, tags: ["職場應用"] }),
+  createLesson({ id: "9XTwTCtRLNc", code: "AI-02-18", title: "用 ChatGPT 與 Canva 提示詞製作內容", description: "短影音展示 ChatGPT 與 Canva 的提示詞協作應用。", durationSeconds: 25, kind: "設計短影音", contentType: "short", tags: ["ChatGPT", "Canva／簡報"] }),
 ];
 
 const workflowLessons = [
@@ -82,6 +93,8 @@ const workflowLessons = [
   createLesson({ id: "ezHAgTET-lk", code: "AI-03-14", title: "部署 Flask App", description: "理解 Flask 應用從本機開發到上線服務的部署流程與常見檢查點。", durationSeconds: 449, kind: "部署實作", tags: ["AI 開發", "系統部署"] }),
   createLesson({ id: "Tx2De59szqM", code: "AI-03-15", title: "DNS 解密：CNAME 紀錄的重要性", description: "理解網域解析與 CNAME 的角色，補足網站部署與服務串接所需的網路知識。", durationSeconds: 404, kind: "系統基礎", tags: ["系統部署"] }),
   createLesson({ id: "dTHz-Zqu4Gk", code: "AI-03-16", title: "AI 工程的三大時代", description: "從提示生成、協作式開發到代理化工程，理解 AI 軟體開發模式的演進。", durationSeconds: 29, kind: "快速導讀", contentType: "long", tags: ["AI 開發"] }),
+  createLesson({ id: "XKdyF63vJx0", code: "AI-03-17", title: "如何讓 GPT 6 Astra 真正實現自動化", description: "以短影音導讀 AI 自動化的應用方向；工具能力以影片示範為準。", durationSeconds: 69, kind: "自動化短影音", contentType: "short", tags: ["自動化"] }),
+  createLesson({ id: "bPgwrgigeMs", code: "AI-03-18", title: "打造完美的 AI 會議紀錄技能包", description: "了解如何把會議紀錄需求整理成可重複使用的 AI 技能流程。", durationSeconds: 350, kind: "辦公工作流", quizStatus: "pending", quizPendingReason: pendingTranscriptQuizReason, tags: ["職場應用", "自動化"] }),
 ];
 
 const systemLessons = [
@@ -101,6 +114,9 @@ const systemLessons = [
   createLesson({ id: "BO03wg4ynDo", code: "AI-04-15", title: "自主移動機器人 AMR：原理與未來", description: "從定位、導航、感測到任務調度，理解自主移動機器人的系統架構與應用。", durationSeconds: 1103, kind: "機器人專題", tags: ["機器人", "自動化"] }),
   createLesson({ id: "zJBWPO_fjdM", code: "AI-04-16", title: "揭開 Pi Agent 極簡設計哲學", description: "從極簡核心、工具調用與上下文管理，理解 Pi Agent 的設計取捨與可擴充架構。", durationSeconds: 626, kind: "Agent 專題", contentType: "long", tags: ["Agent／智能體", "AI 開發"] }),
   createLesson({ id: "v2N4Be96-eg", code: "AI-04-17", title: "Harness 工程：提升 AI Agent 穩定性的關鍵", description: "理解模型之外的 Harness 外圍系統，從資訊邊界、工具、執行編排、記憶、評估到錯誤恢復，提升 Agent 的可靠性。", durationSeconds: 508, kind: "Agent 架構", contentType: "long", tags: ["Agent／智能體", "自動化"] }),
+  createLesson({ id: "QKPFbyY3RG8", code: "AI-04-18", title: "如何建立工業級 RAG 系統", description: "導讀可用於實務的檢索增強生成系統；架構細節以影片內容為準。", durationSeconds: 289, kind: "系統架構", quizStatus: "pending", quizPendingReason: pendingTranscriptQuizReason, tags: ["資料與模型", "AI 開發"] }),
+  createLesson({ id: "4qf_ivV_j2E", code: "AI-04-19", title: "Jev AI 憑什麼比傳統模型快兩百倍", description: "短影音介紹 Jev AI 的效能主張；比較數字仍需核對測試條件。", durationSeconds: 65, kind: "模型短影音", contentType: "short", tags: ["資料與模型"] }),
+  createLesson({ id: "DZLFmS46jJI", code: "AI-04-20", title: "破解 AI 落地困境：什麼是 AI Foundry", description: "以短影音導讀 AI Foundry 與組織導入 AI 的系統化概念。", durationSeconds: 66, kind: "系統短影音", contentType: "short", tags: ["AI 開發", "自動化"] }),
 ];
 
 export const courseStages: CourseStage[] = [

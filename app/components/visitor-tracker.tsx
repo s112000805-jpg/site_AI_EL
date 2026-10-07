@@ -27,6 +27,10 @@ export function VisitorTracker() {
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ visitorId, sessionId, path, referrer: document.referrer }),
         keepalive: true,
+      }).then((response) => {
+        if (response.ok) window.dispatchEvent(new Event("flow-ai:visit-recorded"));
+      }).catch(() => {
+        // 網路暫時不可用時，不影響課程瀏覽。
       });
     } catch {
       // 隱私模式或儲存空間不可用時，網站內容仍應正常使用。

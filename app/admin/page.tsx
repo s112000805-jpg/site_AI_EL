@@ -32,7 +32,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
   const visitorExportParams = new URLSearchParams({ from: visitorRange.from, to: visitorRange.to });
 
   return <main className="dashboard-shell">
-    <header className="dashboard-header"><Link className="brand" href="/"><span>F</span><b>FLOW AI 學院</b></Link><nav><Link href="/">返回課程</Link><Link href="/progress">我的成果</Link><FontSizeControl /><a href={chatGPTSignOutPath("/")} target="_top">登出</a></nav></header>
+    <header className="dashboard-header"><Link className="brand" href="/"><span>F</span><b>FLOW AI 學院</b></Link><nav><Link href="/">返回課程</Link><Link href="/admin/messages">留言審核</Link><Link href="/progress">我的成果</Link><FontSizeControl /><a href={chatGPTSignOutPath("/")} target="_top">登出</a></nav></header>
     <section className="dashboard-title"><div><p className="eyebrow">MANAGER DASHBOARD</p><h1>學習管理報告</h1><p>掌握學員完成進度、學習中的課程與總觀看時間。</p></div></section>
     <section className="metric-grid"><article><span>學員人數</span><b>{allLearners.length}<small> 人</small></b></article><article><span>完成課次</span><b>{completed}<small> 次</small></b></article><article><span>平均完成率</span><b>{avg}%</b></article><article><span>總學習時間</span><b>{formatDuration(watched)}</b></article></section>
     <section className="visitor-dashboard-section">
