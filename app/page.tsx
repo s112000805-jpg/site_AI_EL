@@ -16,7 +16,6 @@ import {
   ChartNoAxesColumnIncreasing,
   CircleHelp,
   MessageCircle,
-  UserRound,
   Wrench,
   Video,
 } from "lucide-react";
@@ -97,7 +96,10 @@ export default async function Home() {
       </div></section>
 
       <section id="instructor" className="instructor-section content-shell" aria-labelledby="instructor-title">
-        <div className="instructor-mark" aria-hidden="true"><UserRound /></div>
+        <figure className="instructor-photo">
+          <Image src="/instructor-chen-chuan-fu.webp" width={752} height={940} sizes="(max-width: 700px) calc(100vw - 88px), (max-width: 980px) 220px, 250px" alt="AI 樂高學堂講師陳銓富形象照" />
+          <figcaption>AI 樂高學堂教學主理人</figcaption>
+        </figure>
         <div className="instructor-copy">
           <p className="eyebrow">MEET YOUR INSTRUCTOR</p>
           <h2 id="instructor-title">認識講師</h2>
